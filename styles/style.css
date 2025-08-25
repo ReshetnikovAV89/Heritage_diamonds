@@ -705,9 +705,7 @@ body::before {
 }
 
 
-
-
-@media (max-width: 420px) {
+@media (max-width: 760px) {
   .header {
     grid-template-columns: 1fr 1fr;
   }
@@ -823,7 +821,7 @@ body::before {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 430px) {
   .nav-link {
     display: block;
     font-size: 20px;       
