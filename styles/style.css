@@ -80,11 +80,14 @@ body::before {
   margin: 0 12px 5px 0;
 }
 
-.header__links-list-item {
-  font-size: 18px;
-  font-weight: 400;
-  text-underline-offset: 4px;
-  font-weight: bold;
+.header__links-list-item a {
+  font-family: "Caveat", cursive;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  background: linear-gradient(to right, currentColor 0%, currentColor 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header__links-list-item_no-bullit {
@@ -126,14 +129,6 @@ body::before {
   transform: scale(1.05) rotate(-1deg);
 }
 
-.header__links-list a {
-  color: var(--text-color);
-}
-
-.header__links-list a:hover,
-.header__links-list a:focus {
-  color: var(--accent-color);
-}
 
 .address {
   font-style: normal; /
@@ -437,10 +432,13 @@ body::before {
 }
 
 .footer__menu-link {
-  color: black;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 400;
+  font-family: "Caveat", cursive;
+  font-size: clamp(1rem, 2vw, 1.6rem);
+  color: var(--text-color);
+  background: linear-gradient(to right, currentColor 0%, currentColor 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .footer__menu-link_active {
@@ -663,13 +661,13 @@ body::before {
 .card__pay-btn { position: relative; z-index: 2; }
 
 .footer address {
-  font-family: 'Caveat', cursive; /* "карандашный" эффект */
+  font-family: 'Caveat', cursive;
   font-size: clamp(1rem, 2.2vw, 1.4rem);
   font-style: normal;
   font-weight: 500;
   text-align: center;
   margin: 10px 0;
-  color: #222;
+  color: var(--text-color);
 }
 
 .theme-toggle {
