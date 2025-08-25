@@ -14,11 +14,20 @@
   <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="./images/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
-  <meta name="theme-color" content="#1e90ff">
+  <meta name="theme-color" content="#1e90ff">   
+  <link id="theme-light" rel="stylesheet" href="./styles/theme-light.css">
+  <link id="theme-dark" rel="stylesheet" href="./styles/theme-dark.css" disabled>
 </head>
   <body>
     <div class="container">
       <header class="header">
+        <div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch" class="switch">
+    <span class="sun">☀️</span>
+    <span class="moon">🌙</span>
+  </label>
+</div>
         <nav class="header__menu" aria-label="Основное меню">
           <ul class="header__links-list">
             <li class="header__links-list-item header__links-list-item_no-bullit">
@@ -142,6 +151,13 @@
       </main>
 
       <footer class="footer">
+        <div class="theme-toggle">
+  <input type="checkbox" id="theme-switch">
+  <label for="theme-switch" class="switch">
+    <span class="sun">☀️</span>
+    <span class="moon">🌙</span>
+  </label>
+</div>
         <div class="footer_address">
           <p><a href="tel:+79148782704">+7 914 878-27-04</a></p>
           <p><a href="mailto:connectingrussia@rambler.ru">connectingrussia@rambler.ru</a></p>
@@ -213,5 +229,31 @@
         });
       });
     </script>
+  <script>
+  const themeSwitch = document.getElementById("theme-switch");
+
+  // Проверяем сохранённую тему
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme) {
+    setTheme(savedTheme);
+    themeSwitch.checked = (savedTheme === "dark");
+  } else {
+    // Если пользователь ещё не выбирал — берём системные настройки
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setTheme(prefersDark ? "dark" : "light");
+    themeSwitch.checked = prefersDark;
+  }
+
+  themeSwitch.addEventListener("change", () => {
+    setTheme(themeSwitch.checked ? "dark" : "light");
+  });
+
+  function setTheme(theme) {
+    document.getElementById("theme-light").disabled = (theme !== "light");
+    document.getElementById("theme-dark").disabled = (theme !== "dark");
+    localStorage.setItem("theme", theme);
+  }
+</script>
   </body>
 </html>

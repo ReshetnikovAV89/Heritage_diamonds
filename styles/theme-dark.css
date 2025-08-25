@@ -1,0 +1,18 @@
+:root {
+  --bg-color: #121212;
+  --text-color: #f1f1f1;
+  --accent-color: #4dabf7;
+  --link-color: #4dabf7;
+  --footer-bg: #1a1a1a;
+  --header-bg: #1a1a1a;
+  --border-color: #333333;
+}
+
+.header__links-list a {
+  color: var(--text-color);
+}
+
+.header__links-list a:hover,
+.header__links-list a:focus {
+  color: var(--text-color);
+}
