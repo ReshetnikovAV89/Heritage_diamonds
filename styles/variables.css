@@ -1,0 +1,8 @@
+
+
+:root {
+  --accent-color: rgb(0, 0, 0, 1);
+  --blue-color: rgb(36, 41, 182, 0.5);
+  --Main-INDIGNATION:clamp(0.625rem, 0.4049rem + 0.939vw, 1.25rem);
+}
+
