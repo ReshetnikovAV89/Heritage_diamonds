@@ -707,7 +707,7 @@ body::before {
 
 
 
-@media (max-width: 376px) {
+@media (max-width: 420px) {
   .header {
     grid-template-columns: 1fr 1fr;
   }
@@ -809,14 +809,6 @@ body::before {
 
   
 
-}
-
-
-
-@media (max-width: 400px) {
-  .oplata__content {
-    padding: 16px;       
-  }
 
   .oplata__text {
     font-size: clamp(0.85rem, 4vw, 1rem); /
