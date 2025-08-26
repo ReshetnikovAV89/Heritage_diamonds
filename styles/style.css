@@ -27,7 +27,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../images/Bg_image.png');
+  background-image: var(--img-bg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -37,7 +37,7 @@ body::before {
 
 .cover {
   position: relative;
-  background-image: url(../images/cover.jpg);
+  background-image: url(../images/cover.webp);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -81,13 +81,20 @@ body::before {
 }
 
 .header__links-list-item a {
-  font-family: "Caveat", cursive;
+  font-family: "Arial", "Helvetica", sans-serif;
   font-size: 1.1rem;
-  color: var(--text-color);
-  background: linear-gradient(to right, currentColor 0%, currentColor 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #2d2d2d;
+  text-decoration: none;
+  background: none;
+  -webkit-text-fill-color: initial;
+  text-shadow: none;
+  filter: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.header__links-list-item a:hover {
+  color: #000;
+  transform: scale(1.05);
 }
 
 .header__links-list-item_no-bullit {
@@ -105,30 +112,6 @@ body::before {
   margin-inline: clamp(8px, 3vw, 40px); 
   height: auto;
 }
-
-.header__links-list-item a {
-  font-family: "Caveat", "Shadows Into Light", "Comic Neue", cursive; /* рукописный стиль */
-  font-size: 1.1rem;
-  color: #2d2d2d;
-  text-decoration: none;
-
-  /* имитация карандашного штриха */
-  background: linear-gradient(to right, #2d2d2d 0%, #2d2d2d 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* лёгкая шероховатость */
-  text-shadow: 0 0 1px rgba(0,0,0,0.2);
-  filter: contrast(1.1) brightness(0.9);
-  transition: transform 0.2s ease, color 0.3s ease;
-}
-
-.header__links-list-item a:hover {
-  color: #000; /* чуть темнее при наведении */
-  transform: scale(1.05) rotate(-1deg);
-}
-
 
 .address {
   font-style: normal; /
@@ -183,45 +166,35 @@ body::before {
 }
 
 .cover__title {
-  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 175px 48px 84px;
-  gap: 33px;
-}
-
-.cover__title span {
-  font-size: var(--font-size-hero);
-  font-weight: 700;
-  line-height: 100%;
-  padding-left: 10px;
-}
-
-.aligned-text {
-  display: block;
-  font-size: clamp(24px, 6vw, 72px); 
-  font-weight: 700;
-  line-height: 1.1;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-block: clamp(8px, 2vw, 16px); 
-}
-/*Здесь может перепишем? жду тексты*/
-.aligned-text_center {
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  gap: 0.5em;
+  padding: 5% 2%;
 }
 
-.aligned-text_right {
-  text-align: right;
+.cover-line {
+  font-size: clamp(32px, 8vw, 80px);
+  font-weight: 700;
+  line-height: 2.1;
+  letter-spacing: 0.2em;
+  display: flex;
+  justify-content: flex-start;
 }
 
-.aligned-text .no-letter-spacing {
-  letter-spacing: 0px;
+.cover-line-left {
+ margin-right: clamp(2.5rem, -10.8824rem + 50.9804vw, 35rem);
 }
 
-.aligned-text .letter-spacing-extended {
-  letter-spacing: 29px;
+
+
+.cover-line-right {
+margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
 }
+
+
 
 .cover__description {
   display: flex;
@@ -312,16 +285,16 @@ body::before {
 }
 
 .card_type_film {
-  background-image: url(../images/card-lot-01.jpg);
+  background-image: url(../images/card-lot-01.webp);
 }
-
+/* переписать когда будет фото
 .card_type_book {
   background-image: url(../images/card-lot-02.jpg);
 }
 
 .card_type_picture {
   background-image: url(../images/card-lot-03.jpg);
-}
+} */
 
 .card__title {
   color: white;
@@ -379,7 +352,7 @@ body::before {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding-top: 100px;
+  padding-top: clamp(1.25rem, -0.8088rem + 7.8431vw, 6.25rem);
 }
 
 .about__title {
@@ -394,7 +367,7 @@ body::before {
   display: flex;
   gap: 25px;
   flex-direction: column;
-  padding-top: 76px;
+  padding-top: clamp(1.25rem, -0.1912rem + 5.4902vw, 4.75rem);
 }
 
 .about__text {
@@ -431,15 +404,6 @@ body::before {
   text-align: center;
 }
 
-.footer__menu-link {
-  font-family: "Caveat", cursive;
-  font-size: clamp(1rem, 2vw, 1.6rem);
-  color: var(--text-color);
-  background: linear-gradient(to right, currentColor 0%, currentColor 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 
 .footer__menu-link_active {
   text-decoration: none;
@@ -456,16 +420,14 @@ body::before {
 }
 
 .footer__menu-link {
-  font-family: "Caveat", "Shadows Into Light", "Comic Neue", cursive;
-  font-size: clamp(1rem, 2vw, 1.6rem); /* адаптивный размер */
+  font-family: "Arial", sans-serif;
+  font-size: clamp(1rem, 2vw, 1.6rem);
   color: #2d2d2d;
   text-decoration: none;
-
-  background: linear-gradient(to right, #2d2d2d 0%, #2d2d2d 100%);
+  background: linear-gradient(to right, currentColor 0%, currentColor 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
   text-shadow: 0 0 1px rgba(0,0,0,0.25);
   filter: contrast(1.1) brightness(0.9);
   transition: transform 0.2s ease, color 0.3s ease;
@@ -733,17 +695,14 @@ body::before {
    
   }
 
-  .header-address {
+  .address-item {
     padding-left: 0;   
   }
 
   .about-container {
     grid-template-columns: 1fr;
   }
-
-  .cover__title span {
-    font-size: 40px;
-  }
+ 
 
   .cover__description {
     display: grid;

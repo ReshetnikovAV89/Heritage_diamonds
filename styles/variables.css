@@ -11,5 +11,12 @@
   --font-size-heading: clamp(1.5rem, 1rem + 2vw, 2.5rem);
   --font-size-title: clamp(2rem, 1.5rem + 3vw, 3.5rem);
   --font-size-hero: clamp(2.5rem, 2rem + 5vw, 5rem);
-  
+
+  --img-bg: repeating-linear-gradient(
+      to right,
+      #d3d3d3 0 2px,
+      transparent 2px 4px
+    ),
+    repeating-linear-gradient(to bottom, #d3d3d3 0 2px, transparent 2px 4px),
+    linear-gradient(to bottom, #e7e7e7 0.01%, #115ee2);
 }
