@@ -55,6 +55,14 @@ body::before {
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
+.cover__title .cover-line {
+  color: #fff;
+  text-shadow: 
+    2px 2px 4px rgba(0,0,0,0.6),
+    4px 4px 8px rgba(0,0,0,0.4),
+    0 0 10px rgba(255,255,255,0.2);
+}
+
 .header {
   display: grid;
   grid-template-columns: min-content 1fr 1fr 1fr;
@@ -859,4 +867,9 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
   .lots__card-list-item {
     max-width: 90%; 
   }
+
+  .cover-line-right {
+    margin-left: 10px; 
+  }
+  
 }
