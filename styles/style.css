@@ -56,6 +56,7 @@ body::before {
 }
 
 .cover__title .cover-line {
+  font-family: 'Playfair Display', serif;
   color: #fff;
   text-shadow: 
     2px 2px 4px rgba(0,0,0,0.6),
@@ -275,7 +276,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
   background-position: center;
 }
 
-.card_type_film {
+.card_type_diamond {
   background-image: url(../images/card-lot-01.webp);
 }
 /* переписать когда будет фото
@@ -866,6 +867,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
 
   .lots__card-list-item {
     max-width: 90%; 
+    max-height: 90%;
   }
 
   .cover-line-right {
