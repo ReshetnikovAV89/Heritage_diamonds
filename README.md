@@ -1,6 +1,9 @@
 Репозиторий:
 git@github.com:ReshetnikovAV89/Heritage_diamonds.git
 
+Ссылка на сайт:
+https://reshetnikovav89.github.io/Heritage_diamonds/
+
 Описание:
 
 # 💎 Heritage Diamonds  
@@ -24,7 +27,6 @@ git@github.com:ReshetnikovAV89/Heritage_diamonds.git
 - **HTML5**  
 - **CSS3** (flexbox, grid, анимации, адаптивность)  
 - **JavaScript (Vanilla)** — модальные окна, обработка кнопок оплаты  
-- Шрифты: *Caveat* + кастомные  
 - Семантическая разметка, доступность (`aria`-атрибуты)  
 
 
