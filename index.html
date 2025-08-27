@@ -19,8 +19,37 @@
 </head>
   <body>
     <div class="container">
+      <!-- Кнопка корзины -->
       <header class="header">
-        
+        <button id="cartButton" class="cart-button" type="button" aria-controls="cartModal">
+          🛒 Корзина
+          <span id="cartCount" class="cart-count">0</span>
+       </button>
+        <!-- Корзина -->
+       <dialog id="cartModal" class="oplata" aria-labelledby="cart-title">
+         <h3 id="cart-title">Корзина</h3>
+         <ul id="cartItems"></ul>
+         <p>Итого: <span id="cartTotal">0</span>₽</p>
+
+        <!-- Кнопка оплаты -->
+        <button id="checkoutButton" class="button-cart">Оплатить</button>
+
+  <!-- Кнопка закрытия -->
+        <form method="dialog">
+        <button type="submit" class="oplata__text-end">Закрыть</button>
+        </form>
+        </dialog>
+
+  <!-- Тестовая модалка оплаты -->
+        <dialog id="testPaymentModal" class="oplata" aria-labelledby="test-payment-title">
+        <div class="oplata__content">
+        <p id="test-payment-title" class="oplata__text">✅ Тестовый платёж прошёл успешно.<br />Спасибо за заказ!</p>
+         </div>
+        <form method="dialog" class="form">
+        <button class="oplata__text-end" type="submit">ок</button>
+        </form>
+        </dialog>       
+
         <nav class="header__menu" aria-label="Основное меню">
           <ul class="header__links-list">
             <li class="header__links-list-item header__links-list-item_no-bullit">
@@ -83,26 +112,36 @@
           <p>
             Наши бриллианты:
           </p>
+
           <ul class="lots__card-list">
             <li class="lots__card-list-item">
               <article class="card card_type_film">
                 <div class="overlay" aria-hidden="true"></div>
                 <h3 class="card__title">Название бриллианта №1</h3>
                 <p class="card__text">Изготавливается по технологии… преимущества… вес… стоимость</p>
+                <p class="card__text">
+                  Стоимость 1000 р.
+                </p>
                 <button class="button card__pay-btn" type="button" data-product="Бриллиант №1" data-amount="1000">
-                  <span class="button__text">Оплатить</span>
+                  <span class="button__text">В корзину</span>
                 </button>
               </article>
             </li>
+
             <li class="lots__card-list-item">
-              <a href="#0">
-                <article class="card card_type_book">
-                  <div class="overlay" aria-hidden="true"></div>
-                  <h3 class="card__title">Название бриллианта №2</h3>
-                  <p class="card__text">Изготавливается по технологии… преимущества… вес… стоимость</p>
-                </article>
-              </a>
+              <article class="card card_type_film">
+                <div class="overlay" aria-hidden="true"></div>
+                <h3 class="card__title">Название бриллианта №2</h3>
+                <p class="card__text">Изготавливается по технологии… преимущества… вес… стоимость </p>
+                <p class="card__text">
+                  стоимость 1500 р.
+                </p>
+                <button class="button card__pay-btn" type="button" data-product="Бриллиант №2" data-amount="1500">
+                  <span class="button__text">В корзину</span>
+                </button>
+              </article>
             </li>
+
           </ul>
           <a href="#0" class="lots__look-more-link">посмотреть больше (видео обзор)</a>
         </section>
@@ -127,6 +166,15 @@
             <button class="oplata__text-end" type="submit">ок</button>
           </form>
         </dialog>
+        <!-- Корзина-->
+        <dialog id="cartModal" class="oplata" aria-labelledby="cart-title">
+              <h3 id="cart-title">Корзина</h3>
+              <ul id="cartItems"></ul>
+              <p>Итого: <span id="cartTotal">0</span>₽</p>
+              <form method="dialog">
+              <button type="submit" class="oplata__text-end">Закрыть</button>
+               </form>
+        </dialog>
 
         <section class="about" aria-label="о нас" id="about">
           <div class="about-container">
@@ -150,7 +198,7 @@
       </main>
 
       <footer class="footer">
-        
+
         <div class="address address-item">
           <p><a href="tel:+79140000400">+7 914 000-04-00</a></p>
           <p><a href="mailto:connectingrussia@rambler.ru">connectingrussia@rambler.ru</a></p>
@@ -162,6 +210,7 @@
             <li class="footer__menu-list-item"><a href="#products" class="footer__menu-link">Продукция</a></li>
             <li class="footer__menu-list-item"><a href="https://checko.ru/company/nasledie-1253800008274" target="_blank" rel="noopener noreferrer" class="footer__menu-link">Сведения о компании</a></li>
           </ul>
+
         </nav>
         <ul class="footer__social-list">
           <li class="footer__social-list-item">
@@ -184,43 +233,126 @@
     </div>
 
     <script>
-      const modal = document.getElementById("modal");
-      const openModalBtn = document.querySelector(".cover .button");
-      if (openModalBtn) openModalBtn.addEventListener("click", () => modal.showModal());
+// Модалки
+const modal = document.getElementById("modal");
+const videoModal = document.getElementById("videoModal");
+const videoElement = videoModal.querySelector("video");
+const videoSource = videoElement.querySelector("source");
+const testPaymentModal = document.getElementById("testPaymentModal");
+const cartModal = document.getElementById("cartModal");
 
-      const videoModal = document.getElementById("videoModal");
-      const videoElement = videoModal.querySelector("video");
-      const videoSource = videoElement.querySelector("source");
-      const lookMoreLink = document.querySelector(".lots__look-more-link");
-      if (lookMoreLink) {
-        lookMoreLink.addEventListener("click", (e) => {
-          e.preventDefault();
-          if (!videoSource.src) {
-            videoSource.src = videoSource.dataset.src;
-            videoElement.load();
-          }
-          videoModal.showModal();
-          videoElement.play().catch(() => {});
-        });
-      }
-      videoModal.addEventListener("close", () => {
-        videoElement.pause();
-        videoSource.src = "";
-        videoElement.load();
-      });
+// Кнопка "Заказать" на cover
+const openModalBtn = document.querySelector(".cover .button");
+if (openModalBtn) {
+  openModalBtn.addEventListener("click", () => modal.showModal());
+}
 
-      const payButtons = document.querySelectorAll(".card__pay-btn");
-      const testPaymentModal = document.getElementById("testPaymentModal");
-      payButtons.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          const product = btn.dataset.product || "Товар";
-          const amount = btn.dataset.amount || "1000";
-          console.log(`Тестовая оплата: ${product} на сумму ${amount}₽`);
-          testPaymentModal.showModal();
-        });
-      });
+// Видео модалка
+const lookMoreLink = document.querySelector(".lots__look-more-link");
+if (lookMoreLink) {
+  lookMoreLink.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!videoSource.src) {
+      videoSource.src = videoSource.dataset.src;
+      videoElement.load();
+    }
+    videoModal.showModal();
+    videoElement.play().catch(() => {});
+  });
+}
+videoModal.addEventListener("close", () => {
+  videoElement.pause();
+  videoSource.src = "";
+  videoElement.load();
+});
+
+// Корзина
+let cart = [];
+const cartItemsList = document.getElementById("cartItems");
+const cartTotal = document.getElementById("cartTotal");
+const cartCount = document.getElementById("cartCount"); // Счетчик товаров
+
+// Кнопки "В корзину"
+const cartButtons = document.querySelectorAll(".card__pay-btn");
+
+// Функция обновления отображения корзины
+function updateCartDisplay() {
+  cartItemsList.innerHTML = "";
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.textContent = `${item.product} — ${item.amount}₽`;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "❌";
+    removeBtn.style.marginLeft = "10px";
+    removeBtn.style.cursor = "pointer";
+    removeBtn.addEventListener("click", () => {
+      cart.splice(index, 1);
+      updateCartDisplay();
+    });
+
+    li.appendChild(removeBtn);
+    cartItemsList.appendChild(li);
+    total += item.amount;
+  });
+
+  cartTotal.textContent = total;
+  cartCount.textContent = cart.length; // <-- обновление счетчика
+}
+
+// Обработчик кнопок "В корзину"
+cartButtons.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const product = btn.dataset.product || "Товар";
+    const amount = Number(btn.dataset.amount) || 0;
+
+    cart.push({ product, amount });
+    updateCartDisplay();
+    cartModal.showModal();
+  });
+});
+
+// Кнопка "Корзина" в header
+const headerCartButton = document.getElementById("cartButton");
+if (headerCartButton) {
+  headerCartButton.addEventListener("click", () => {
+    updateCartDisplay();
+    cartModal.showModal();
+  });
+}
+
+// Кнопка "Оплатить" в корзине
+const checkoutButton = document.getElementById("checkoutButton");
+checkoutButton.addEventListener("click", () => {
+  if (cart.length === 0) {
+    alert("Корзина пуста!");
+    return;
+  }
+  console.log("Тестовая оплата товаров:", cart);
+  testPaymentModal.showModal();
+  cart = [];
+  updateCartDisplay();
+});
+
+
+// Тестовая оплата (отдельно)
+
+const testPayButtons = document.querySelectorAll(".button.card__pay-btn-test");
+testPayButtons.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const product = btn.dataset.product || "Товар";
+    const amount = Number(btn.dataset.amount) || 0;
+    console.log(`Тестовая оплата: ${product} на сумму ${amount}₽`);
+    testPaymentModal.showModal();
+  });
+});
     </script>
   
   </body>

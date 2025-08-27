@@ -1,6 +1,7 @@
 
 :root {
   --accent-color: #000000;
+  --button-color: rgba(0, 0, 0, 0.4);
   --blue-color: rgba(36, 41, 182, 0.5);
   --bg-color: #ffffff;
   --text-color: #222222;
