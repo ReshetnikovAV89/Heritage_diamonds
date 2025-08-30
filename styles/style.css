@@ -85,7 +85,7 @@ body::before {
 
 .header__links-list-item a {
   font-family: "Arial", "Helvetica", sans-serif;
-  font-size: 1.1rem;
+  font-size: 1.0rem;
   color: #2d2d2d;
   text-decoration: none;
   background: none;
@@ -117,7 +117,7 @@ body::before {
 }
 
 .address {
-  font-style: normal; /
+  font-style: normal; 
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -249,18 +249,16 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
 
 .lots__card-list {
   display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-  gap: 25px;
-  justify-content: flex-start;
-  margin: 0 auto;
-  padding: 0 25px;
+  flex-wrap: wrap;    
+  gap: 24px;            
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .lots__card-list-item {
-  max-width: 334px;
-  min-height: 596px;
-  flex-grow: 1;
+  flex: 1 1 calc(25% - 20px); 
+  box-sizing: border-box;    
 }
 
 .card {
@@ -276,17 +274,115 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
   background-position: center;
 }
 
-.card_type_diamond {
-  background-image: url(../images/card-lot-01.webp);
-}
-/* переписать когда будет фото
-.card_type_book {
-  background-image: url(../images/card-lot-02.jpg);
+.card_type_Asscher {
+  background-image: url(../images/Cutting_forms/Asscher.jpg);
+  width: 100%;
 }
 
-.card_type_picture {
-  background-image: url(../images/card-lot-03.jpg);
-} */
+.card_type_Baguette {
+  background-image: url(../images/Cutting_forms/Baguette.jpg);
+}
+
+.card_type_Cushion {
+  background-image: url(../images/Cutting_forms/Cushion.jpg);
+}
+
+.card_type_Emerald {
+  background-image: url(../images/Cutting_forms/Emerald.jpg);
+}
+
+.card_type_Heart {
+  background-image: url(../images/Cutting_forms/Heart.jpg);
+}
+
+.card_type_Marquise {
+  background-image: url(../images/Cutting_forms/Marquise.jpg);
+}
+
+.card_type_Oval {
+  background-image: url(../images/Cutting_forms/Oval.jpg);
+}
+
+.card_type_Pear {
+  background-image: url(../images/Cutting_forms/Pear.jpg);
+}
+
+.card_type_Princess {
+  background-image: url(../images/Cutting_forms/Princess.jpg);
+}
+
+.card_type_Radiant {
+  background-image: url(../images/Cutting_forms/Radiant.jpg);
+}
+
+.card_type_Round {
+  background-image: url(../images/Cutting_forms/Round.jpg);
+}
+
+.card_type_Trilliant {
+  background-image: url(../images/Cutting_forms/Trilliant.jpg);
+}
+
+.card_type_Baguette {
+  background-image: url(../images/Cutting_forms/Baguette.jpg);
+}
+
+.card_type_Cushion {
+  background-image: url(../images/Cutting_forms/Cushion.jpg);
+}
+
+.card_type_Emerald {
+  background-image: url(../images/Cutting_forms/Emerald.jpg);
+}
+
+.card_type_Heart {
+  background-image: url(../images/Cutting_forms/Heart.jpg);
+}
+
+.card_type_Marquise {
+  background-image: url(../images/Cutting_forms/Marquise.jpg);
+}
+
+.card_type_Oval {
+  background-image: url(../images/Cutting_forms/Oval.jpg);
+}
+
+.card_type_Pear {
+  background-image: url(../images/Cutting_forms/Pear.jpg);
+}
+
+.card_type_Princess {
+  background-image: url(../images/Cutting_forms/Princess.jpg);
+}
+
+.card_type_Radiant {
+  background-image: url(../images/Cutting_forms/Radiant.jpg);
+}
+
+.card_type_Round {
+  background-image: url(../images/Cutting_forms/Round.jpg);
+}
+
+.card_type_Trilliant {
+  background-image: url(../images/Cutting_forms/Trilliant.jpg);
+}
+
+.card_type_Asscher,
+.card_type_Baguette,
+.card_type_Cushion,
+.card_type_Emerald,
+.card_type_Heart,
+.card_type_Marquise,
+.card_type_Oval,
+.card_type_Pear,
+.card_type_Princess,
+.card_type_Radiant,
+.card_type_Round,
+.card_type_Trilliant {
+  width: 313px;
+  height: 278px;
+}
+
 
 .card__title {
   color: white;
@@ -766,7 +862,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
   }
 
   .lots__card-list {
-    grid-template-columns: 1fr; 
+    grid-template-columns: auto; 
     padding-left: 0;
   }
 
@@ -855,21 +951,18 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);;
     width: 100%;
     max-width: 250px; 
   }  
-  .lots__card-list {
+
+  .lots__card-list {    
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 0;
     margin: 0 auto;
     width: 100%;
-    align-items: center; 
+    align-items: center;
   }
 
-  .lots__card-list-item {
-    max-width: 90%; 
-    max-height: 90%;
-  }
-
+  
   .cover-line-right {
     margin-left: 10px; 
   }
