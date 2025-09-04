@@ -337,7 +337,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 .card--type-round,
 .card--type-trilliant {
   width: 313px;
-  height: 278px;
+  height: 420px;
 }
 
 .card__title {
