@@ -43,3 +43,9 @@
     transform: translateX(-100%);
   }
 }
+
+
+@keyframes cardBackdropIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

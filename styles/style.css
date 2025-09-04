@@ -270,7 +270,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 }
 
 .lots__heading {
-  padding: 80px 0 26px 176px;
+  padding: 80px 0 0px 176px;
   color: #000;
   font-size: var(--font-size-xlarge);
   font-weight: 700;
@@ -337,7 +337,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 .card--type-round,
 .card--type-trilliant {
   width: 313px;
-  height: 420px;
+  
 }
 
 .card__title {
@@ -991,10 +991,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   background: rgba(0,0,0,.42);
   backdrop-filter: blur(2px);
   animation: cardBackdropIn .2s ease-out;
-}
-@keyframes cardBackdropIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }
 
 /* ==== Тёмная тема (если есть) ==== */
