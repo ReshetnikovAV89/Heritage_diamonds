@@ -270,7 +270,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 }
 
 .lots__heading {
-  padding: 80px 0 0px 176px;
+  /*padding: 80px 0 0px 176px;*/
   color: #000;
   font-size: var(--font-size-xlarge);
   font-weight: 700;
@@ -278,6 +278,8 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   opacity: 0;
   transform: translateY(30px);
   animation: fadeInUp 1.2s ease-out forwards;
+  margin-top: 20px;
+  
 }
 
 .lots__card-list {
@@ -414,7 +416,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 
 .about__title {
   color: black;
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
   line-height: 46.96px;
   text-transform: uppercase;
@@ -1009,6 +1011,74 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
     background: rgba(0,0,0,.6);
     backdrop-filter: blur(2px);
   }
+}
+
+/* ===== Preloader ===== */
+html.is-preloading,
+html.is-preloading body { overflow: hidden; }
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: #f2f3f5;
+  color: #111;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+
+.preloader__inner {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  padding: 24px 28px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+}
+
+.preloader__logo {
+  font-family: "Caveat", cursive, sans-serif;
+  font-weight: 600;
+  font-size: clamp(32px, 5vw, 46px);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Квадратики */
+.preloader__squares {
+  --size: 14px;
+  --gap: 10px;
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.preloader__square {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 3px;
+  outline: 2px solid rgba(33, 64, 178, .8);
+  background: transparent;
+  animation: sq-fill 1.2s infinite;
+}
+
+.preloader__square:nth-child(1) { animation-delay: 0s; }
+.preloader__square:nth-child(2) { animation-delay: .15s; }
+.preloader__square:nth-child(3) { animation-delay: .30s; }
+.preloader__square:nth-child(4) { animation-delay: .45s; }
+
+
+
+/* Скрытие после загрузки */
+.preloader--hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 /* ==== Мобильные детали ==== */

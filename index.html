@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" id="top">
 <head>
+  <script>document.documentElement.classList.add('is-preloading');</script>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -32,6 +33,18 @@
 </head>
 
 <body>
+<!-- Preloader -->
+<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Загрузка сайта">
+  <div class="preloader__inner">
+    <div class="preloader__logo" aria-hidden="true">Наследие, создадим вместе...</div>
+    <ul class="preloader__squares" aria-hidden="true">
+      <li class="preloader__square"></li>
+      <li class="preloader__square"></li>
+      <li class="preloader__square"></li>
+      <li class="preloader__square"></li>
+    </ul>
+  </div>
+</div>
   <div class="container">
     <!-- Кнопка корзины -->
     <header class="header">
@@ -616,94 +629,166 @@
   </div>
 
   <script>
-    /* JS без изменений селекторов кроме кнопки оплаты (cart__pay-button) */
-    const modal = document.getElementById("modal");
-    const videoModal = document.getElementById("videoModal");
-    const testPaymentModal = document.getElementById("testPaymentModal");
-    const cartModal = document.getElementById("cartModal");
+    
+  /* === Модалка оплаты и видео === */
+  const modal = document.getElementById("modal");
+  const videoModal = document.getElementById("videoModal");
+  const testPaymentModal = document.getElementById("testPaymentModal");
+  const cartModal = document.getElementById("cartModal");
 
-    const openModalBtn = document.querySelector(".cover .button");
-    if (openModalBtn && modal) openModalBtn.addEventListener("click", () => modal.showModal());
+  const openModalBtn = document.querySelector(".cover .button");
+  if (openModalBtn && modal) {
+    openModalBtn.addEventListener("click", () => modal.showModal());
+  }
 
-    const videoElement = videoModal ? videoModal.querySelector("video") : null;
-    const videoSource = videoElement ? videoElement.querySelector("source") : null;
-    const lookMoreLink = document.querySelector(".lots__look-more-link");
-    if (lookMoreLink && videoModal && videoElement && videoSource) {
-      lookMoreLink.addEventListener("click", (e) => {
-        e.preventDefault();
-        if (!videoSource.src) { videoSource.src = videoSource.dataset.src; videoElement.load(); }
-        videoModal.showModal();
-        videoElement.play().catch(() => {});
-      });
-      videoModal.addEventListener("close", () => { videoElement.pause(); videoSource.src = ""; videoElement.load(); });
-    }
+  const videoElement = videoModal ? videoModal.querySelector("video") : null;
+  const videoSource = videoElement ? videoElement.querySelector("source") : null;
+  const lookMoreLink = document.querySelector(".lots__look-more-link");
+  if (lookMoreLink && videoModal && videoElement && videoSource) {
+    lookMoreLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (!videoSource.src) {
+        videoSource.src = videoSource.dataset.src;
+        videoElement.load();
+      }
+      videoModal.showModal();
+      videoElement.play().catch(() => {});
+    });
+    videoModal.addEventListener("close", () => {
+      videoElement.pause();
+      videoSource.src = "";
+      videoElement.load();
+    });
+  }
 
-    let cart = [];
-    const cartItemsList = document.getElementById("cartItems");
-    const cartTotal = document.getElementById("cartTotal");
-    const cartCount = document.getElementById("cartCount");
+  /* === Корзина === */
+  let cart = [];
+  const cartItemsList = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+  const cartCount = document.getElementById("cartCount");
 
-    function updateCartDisplay() {
-      if (!cartItemsList || !cartTotal || !cartCount) return;
-      cartItemsList.innerHTML = "";
-      let total = 0;
-      cart.forEach((item, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${item.product} — ${item.amount}₽`;
-        const removeBtn = document.createElement("button");
-        removeBtn.type = "button";
-        removeBtn.setAttribute("aria-label", `Удалить ${item.product} из корзины`);
-        removeBtn.textContent = "❌";
-        removeBtn.style.marginLeft = "10px";
-        removeBtn.style.cursor = "pointer";
-        removeBtn.addEventListener("click", () => { cart.splice(index, 1); updateCartDisplay(); });
-        li.appendChild(removeBtn);
-        cartItemsList.appendChild(li);
-        total += item.amount;
-      });
-      cartTotal.textContent = String(total);
-      cartCount.textContent = String(cart.length);
-    }
-
-    document.querySelectorAll(".card__pay-btn").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault(); e.stopPropagation();
-        const product = btn.dataset.product || "Товар";
-        const amount = Number(btn.dataset.amount) || 0;
-        cart.push({ product, amount });
+  function updateCartDisplay() {
+    if (!cartItemsList || !cartTotal || !cartCount) return;
+    cartItemsList.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.textContent = `${item.product} — ${item.amount}₽`;
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.setAttribute("aria-label", `Удалить ${item.product} из корзины`);
+      removeBtn.textContent = "❌";
+      removeBtn.style.marginLeft = "10px";
+      removeBtn.style.cursor = "pointer";
+      removeBtn.addEventListener("click", () => {
+        cart.splice(index, 1);
         updateCartDisplay();
-        if (cartModal) cartModal.showModal();
+      });
+      li.appendChild(removeBtn);
+      cartItemsList.appendChild(li);
+      total += item.amount;
+    });
+    cartTotal.textContent = String(total);
+    cartCount.textContent = String(cart.length);
+  }
+
+  document.querySelectorAll(".card__pay-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const product = btn.dataset.product || "Товар";
+      const amount = Number(btn.dataset.amount) || 0;
+      cart.push({ product, amount });
+      updateCartDisplay();
+      if (cartModal) cartModal.showModal();
+    });
+  });
+
+  const headerCartButton = document.getElementById("cartButton");
+  if (headerCartButton && cartModal) {
+    headerCartButton.addEventListener("click", () => {
+      updateCartDisplay();
+      cartModal.showModal();
+      headerCartButton.setAttribute("aria-expanded", "true");
+    });
+    cartModal.addEventListener("close", () => {
+      headerCartButton.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  const checkoutButton = document.getElementById("checkoutButton");
+  if (checkoutButton && testPaymentModal) {
+    checkoutButton.addEventListener("click", () => {
+      if (cart.length === 0) {
+        alert("Корзина пуста!");
+        return;
+      }
+      console.log("Тестовая оплата товаров:", cart);
+      testPaymentModal.showModal();
+      cart = [];
+      updateCartDisplay();
+    });
+  }
+
+  document.querySelectorAll(".button.card__pay-btn-test").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const product = btn.dataset.product || "Товар";
+      const amount = Number(btn.dataset.amount) || 0;
+      console.log(`Тестовая оплата: ${product} на сумму ${amount}₽`);
+      testPaymentModal.showModal();
+    });
+  });
+
+  /* === Модалки карточек «Читать более подробно» === */
+  (function () {
+    const openButtons = document.querySelectorAll('.card__more-btn[data-modal-target]');
+    openButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.getAttribute('data-modal-target');
+        const dlg = document.getElementById(id);
+        if (dlg && typeof dlg.showModal === 'function') dlg.showModal();
       });
     });
 
-    const headerCartButton = document.getElementById("cartButton");
-    if (headerCartButton && cartModal) {
-      headerCartButton.addEventListener("click", () => {
-        updateCartDisplay(); cartModal.showModal(); headerCartButton.setAttribute("aria-expanded","true");
-      });
-      cartModal.addEventListener("close", () => headerCartButton.setAttribute("aria-expanded","false"));
-    }
-
-    const checkoutButton = document.getElementById("checkoutButton");
-    if (checkoutButton && testPaymentModal) {
-      checkoutButton.addEventListener("click", () => {
-        if (cart.length === 0) { alert("Корзина пуста!"); return; }
-        console.log("Тестовая оплата товаров:", cart);
-        testPaymentModal.showModal();
-        cart = [];
-        updateCartDisplay();
-      });
-    }
-
-    document.querySelectorAll(".button.card__pay-btn-test").forEach((btn) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault(); e.stopPropagation();
-        const product = btn.dataset.product || "Товар";
-        const amount = Number(btn.dataset.amount) || 0;
-        console.log(`Тестовая оплата: ${product} на сумму ${amount}₽`);
-        testPaymentModal.showModal();
-      });
+    document.addEventListener('click', (e) => {
+      const closeBtn = e.target.closest('[data-modal-close]');
+      if (!closeBtn) return;
+      const dlg = closeBtn.closest('dialog');
+      if (dlg) dlg.close();
     });
-  </script>
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('dialog[open]').forEach(dlg => dlg.close());
+      }
+    });
+  })();
+
+  /* === Прелоадер === */
+  (function () {
+    const pre = document.getElementById('preloader');
+    if (!pre) return;
+
+    const fallback = setTimeout(hidePreloader, 3000);
+
+    window.addEventListener('load', () => {
+      clearTimeout(fallback);
+      requestAnimationFrame(() => requestAnimationFrame(hidePreloader));
+    });
+
+    function hidePreloader() {
+      document.documentElement.classList.remove('is-preloading');
+      pre.classList.add('preloader--hide');
+      pre.setAttribute('aria-hidden', 'true');
+
+      const remove = () => pre.remove();
+      pre.addEventListener('transitionend', remove, { once: true });
+      setTimeout(remove, 600);
+    }
+  })();
+</script>
+
 </body>
 </html>
