@@ -1,3 +1,17 @@
+/* центрирование всех dialog по умолчанию и базовые размеры */
+dialog{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(92vw, 800px);
+  width: auto;
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+}
+
+/* ====== остальной ваш файл без изменений до правок (сократить нельзя), но ниже идут нужные изменения ====== */
+
 dialog{
   position: fixed;
   top: 50%;
@@ -744,13 +758,13 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   align-items: center;
   padding: 0;
 }
-
+/*
 .modal__video {
   width: 100%;
   height: auto;
   display: block;
   border-radius: 8px;
-}
+}*/
 
 .modal__close {
   margin: 12px auto;
@@ -1820,4 +1834,230 @@ html.is-preloading body { overflow: hidden; }
   .header .address a{
     word-break: break-all; /* ломаем длинный e-mail по любому месту */
   }
+}
+
+/*фикс центрирования модалки*/
+/* было: .card__modal[open]{ animation: cardModalIn .18s ease-out; } */
+/* стало: */
+.card__modal[open]{
+  animation: cardModalFade .18s ease-out;
+}
+
+/* новая анимация — только прозрачность */
+@keyframes cardModalFade{
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+/* Центр по экрану для всех <dialog> */
+dialog{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);        /* не трогаем transform в анимациях */
+  max-height: min(85vh, calc(100dvh - 48px));
+  overflow: auto;
+}
+
+
+/* --- UPDATE: «металлик + море» для кнопок закрытия модалок
+   и убираем «чёрную плашку» на всю ширину --- */
+
+.card__modal .modal__close-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 14px auto 20px;
+  width: auto;                   /* больше не на всю ширину */
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  border: 1px solid color-mix(in srgb, #1e90ff 55%, #7aa4ff);
+  color: #0b3d91;
+  background:
+    linear-gradient(180deg, #eef3fb, #d5deef);
+  box-shadow:
+    0 8px 18px rgba(30,144,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset 0 -1px 0 rgba(0,0,0,.12);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.card__modal .modal__close-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(30,144,255,.28);
+  background: linear-gradient(180deg, #e8f0ff, #cbd9f3);
+}
+
+/* такая же тема для видео-кнопки */
+.modal__close{
+  border: 1px solid color-mix(in srgb, #1e90ff 55%, #7aa4ff);
+  color: #0b3d91;
+  background: linear-gradient(180deg, #eef3fb, #d5deef);
+  box-shadow:
+    0 8px 18px rgba(30,144,255,.18),
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset 0 -1px 0 rgba(0,0,0,.12);
+}
+.modal__close:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(30,144,255,.28);
+  background: linear-gradient(180deg, #e8f0ff, #cbd9f3);
+}
+
+/* Центрируем видеомодалку принудительно */
+.modal.modal--video[open]{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  margin: 0;
+}
+
+/* Центрируем кнопку закрытия в карточных модалках */
+.card__modal .modal__close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px auto 24px; /* центрирование и отступы */
+}
+
+/* Фикс видео-модалки — центрирование и адаптация */
+.modal.modal--video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  margin: 0;
+  background: transparent; /* убираем фон */
+  border: none;
+  padding: 0;
+}
+
+.modal.modal--video::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+/* Видео самоцентрируется и масштабируется под окно */
+.modal__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__video {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* === FIX: скрываем видео-модалку по умолчанию === */
+.modal.modal--video {
+  display: none !important;      /* по умолчанию скрыта */
+}
+
+.modal.modal--video[open] {
+  display: flex !important;      /* показывается только при открытии */
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+/* === ФИКС ЦЕНТРИРОВАНИЯ ВИДЕО-МОДАЛКИ === */
+.modal.modal--video {
+  display: none !important; /* скрыта по умолчанию */
+}
+
+.modal.modal--video[open] {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  z-index: 1000;
+}
+
+/* видео остаётся вписанным и центрируется */
+
+.modal__video {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+
+/* === ФОН КАРТОЧЕК: светлый, не затираем background-image === */
+/* карточка: НЕ трогаем background (чтобы не убить background-image),
+   даём лишь светлую подложку на случай отсутствия картинки */
+.card{
+  background-color: #f9fbff;        /* лёгкий светлый фон-подложка */
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
+}
+
+/* если ранее был оверлей через ::before — выключаем полностью */
+.card::before{
+  content: none !important;         /* никаких тёмных градиентов поверх изображения */
+}
+
+/* если где-то остался div.overlay в карточках — гарантированно скрываем */
+.card .overlay{
+  display: none !important;
+}
+
+/* (не обязательно) мягкий «блик», прозрачный — НЕ перекрывает картинку */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius: inherit;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.35), transparent 65%);
+}
+
+/* общий стиль видео-диалога */
+dialog.modal--video{
+  border: none;
+  background: transparent;          /* контейнер прозрачный */
+  padding: 0;
+  max-width: 92vw;
+  width: 92vw;                      /* ширина области содержимого */
+}
+
+/* при открытии — центрируем по экрану как flex-контейнер */
+dialog.modal--video[open]{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* контент и видео растягиваются аккуратно */
+.modal__content{
+  width: 100%;
+  max-width: 900px;
+}
+.modal__video{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* полупрозрачный тёмный фон */
+.modal--video::backdrop{
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(2px);
 }

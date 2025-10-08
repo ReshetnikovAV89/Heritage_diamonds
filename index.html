@@ -454,10 +454,19 @@
   (function () {
     const openButtons = document.querySelectorAll('.card__more-btn[data-modal-target]');
     openButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         const id = btn.getAttribute('data-modal-target');
         const dlg = document.getElementById(id);
-        if (dlg && typeof dlg.showModal === 'function') dlg.showModal();
+        if (dlg && typeof dlg.showModal === 'function') {
+          // фикс: блокируем скролл документа и запоминаем позицию
+          lockBody();
+          dlg.showModal();
+          // клик по фону — закрыть
+          dlg.addEventListener('click', (ev) => {
+            if (ev.target === dlg) dlg.close();
+          }, { once: true });
+        }
       });
     });
 
@@ -649,7 +658,12 @@
         videoSource.src = videoSource.dataset.src;
         videoElement.load();
       }
+      lockBody();                 // фикс: не дёргать страницу при открытии
       videoModal.showModal();
+      // клик по фону — закрыть
+      videoModal.addEventListener('click', (ev) => {
+        if (ev.target === videoModal) videoModal.close();
+      }, { once: true });
       videoElement.play().catch(() => {});
     });
     videoModal.addEventListener("close", () => {
@@ -790,6 +804,62 @@
   const h = document.querySelector('.header');
   const t = () => h.classList.toggle('header--compact', scrollY > 20);
   t(); addEventListener('scroll', t, { passive: true });
+  // 1) Глушим все href="#" (чтобы страница не улетала вверх)
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href="#"]');
+  if (a) e.preventDefault();
+});
+
+// 2) Блокировка скролла боди на время модалки (и восстановление позиции)
+let _scrollY = 0;
+function lockBody() {
+  _scrollY = window.scrollY || document.documentElement.scrollTop;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${_scrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+}
+function unlockBody() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  window.scrollTo(0, _scrollY);
+}
+
+// 3) Открытие/закрытие диалогов
+const dialogs = document.querySelectorAll('dialog');
+
+document.querySelectorAll('[data-open]').forEach(btn => {
+  const id = btn.dataset.open;
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const dlg = document.getElementById(id);
+    if (dlg) {
+      lockBody();
+      dlg.showModal();
+      // клик по фону — закрыть
+      dlg.addEventListener('click', (ev) => {
+        if (ev.target === dlg) dlg.close();
+      }, { once: true });
+    }
+  });
+});
+
+document.querySelectorAll('[data-close-dialog]').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    btn.closest('dialog')?.close();
+  });
+});
+
+// при любом закрытии — возвращаем скролл
+dialogs.forEach(dlg => {
+  dlg.addEventListener('close', unlockBody);
+  dlg.addEventListener('cancel', (e) => { e.preventDefault(); dlg.close(); });
+});
 </script>
 
 </body>
