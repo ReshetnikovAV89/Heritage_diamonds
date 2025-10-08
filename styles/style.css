@@ -1,11 +1,22 @@
+dialog{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: min(92vw, 800px);
+  width: auto;
+  max-height: calc(100dvh - 48px);
+  overflow: auto;
+}
+
 body {
   font-family: "Arial", sans-serif;
   font-size: var(--font-size-base);
   color: var(--text-color);
   background-color: var(--bg-color);
   line-height: 1.5;
-  margin: var(--main-indignation);
-  padding: var(--main-indignation);
+  margin: 0;
+  padding: 0;
   /*центрирование*/
    max-width: clamp(320px, 92vw, 1200px);
   margin-inline: auto;      /* центр по горизонтали */
@@ -87,6 +98,7 @@ body::before {
 
   border-bottom: 1px solid rgba(0, 0, 0, .06);
   box-shadow: 0 6px 18px rgba(0, 0, 0, .06);
+  
 }
 
 .header__menu {
@@ -246,7 +258,7 @@ body::before {
 }
 
 .cover__line_left {
- margin-right: 200px;
+ margin-right: 180px;
 }
 
 .cover__line_right {
@@ -1029,7 +1041,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   user-select: none;
 
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
 
   font-family: "Raleway", sans-serif;
@@ -1078,8 +1090,12 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   color: var(--accent, #1e90ff);
   text-decoration: underline;
   transition: color .2s ease, transform .2s ease;
+
+  white-space: nowrap;
 }
-.about__details[open] .about__summary::after{ content: "Свернуть"; }
+.about__details[open] .about__summary::after{ content: "Свернуть"; 
+  white-space: nowrap;
+}
 .about__summary:hover::after{ color: #0f78d1; transform: translateY(-1px); }
 
 /* контент */
@@ -1095,8 +1111,14 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 
 /* мобильная подпись короче */
 @media (max-width: 480px){
-  .about__summary::after{ content: "Подробнее"; }
-  .about__details[open] .about__summary::after{ content: "Свернуть"; }
+  .about__summary::after{ content: "Подробнее"; 
+  white-space: nowrap;
+}
+  .about__details[open] .about__summary::after{ content: "Свернуть"; 
+  white-space: nowrap;
+}
+
+
 }
 
 
@@ -1364,7 +1386,7 @@ html.is-preloading body { overflow: hidden; }
     grid-template-columns: 1fr 1fr;
   }
   .cover__line_left {
-  margin-right: 70px;
+  margin-right: 0px;
  }
 
   .header__logo {
@@ -1495,17 +1517,10 @@ html.is-preloading body { overflow: hidden; }
   .cover__line_right { margin-left: 10px; }
 }
 
-/* === FIX: центрирование диалогов + белая тема для card__modal и oplata === */
+
 
 /* Центруем САМ диалог */
-.card__modal[open],
-.oplata[open],
-.modal.modal--video[open] {
-  inset: 0;            /* допускается, чтобы работало во всех браузерах */
-  margin: auto;        /* центр по горизонтали и вертикали */
-  padding: 0;
-  /* display:flex у диалога не нужен */
-}
+
 
 /* Если хочешь — единые размеры для диалогов */
 .card__modal,
@@ -1583,39 +1598,6 @@ html.is-preloading body { overflow: hidden; }
 }
 
 
-/*затемнение карточек на выбор*/
-/* 1) Больше не используем глобальную .overlay */
-.overlay {
-  background: none !important;
-  box-shadow: none !important;
-}
-
-/* 2) На карточках вообще прячем overlay-элемент */
-.card .overlay {
-  display: none !important;
-}
-
-/* 3) Убираем внутреннее затемнение карточек (если нужно полностью «чистое» изображение) */
-.card::before {
-  background: none !important;
-}
-
-/* 4) Если затемнение нужно только на обложке — оставляем ТОЛЬКО там и делаем его слабее */
-.cover > .overlay {
-  background: linear-gradient(
-    180deg,
-    rgba(0,0,0,.18) 0%,
-    rgba(0,0,0,.10) 40%,
-    rgba(0,0,0,.05) 100%
-  ) !important;
-  box-shadow: none !important;
-}
-
-/* На всякий случай уберём фон на .cover, если где-то задан */
-.cover {
-  background-color: transparent !important;
-}
-
 /*правки карточек дополнительные*/
 
 /* --- CARD: заголовок-чип и тёмная типографика --- */
@@ -1685,4 +1667,157 @@ html.is-preloading body { overflow: hidden; }
 .card .card__more-btn,
 .card .card__pay-btn{
   font-weight: 700;
+}
+
+
+/* Typographic comfy text inside dialogs */
+.card__modal .card__text,
+.oplata p,
+.oplata .oplata__content{
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+
+/*фикс модалки*/
+/* В модалке заголовок — обычный, без "пилюли" и без absolute */
+.card__modal .card__title{
+  position: static !important;
+  top: auto; left: auto;
+  display: block;
+  padding: 16px 20px 0;
+  margin: 0;
+  max-width: none;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  color: #111 !important;
+  text-shadow: none !important;
+  white-space: normal;
+}
+
+.card__modal .card__text{
+  padding: 8px 20px 16px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+
+/*фикс вида на мобилке*/
+
+/* --- Фикс длинных строк в карточках "о продукте" --- */
+@media (max-width: 560px) {
+  .about__details {
+    font-size: 0.9rem; /* немного меньше весь текст карточки */
+  }
+
+  .about__summary {
+    flex-wrap: wrap; /* разрешаем перенос внутри строки */
+  }
+
+  /* Дефис + текст "— не нужно..." слегка ужимаем */
+  .about__summary::before {
+    content: ""; /* резервируем место */
+  }
+
+  .about__more {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  /* Контейнер тянется, текст не вылазит */
+  .about__details,
+  .about__summary {
+    min-width: 0;
+  }
+
+  /* Ставим flex-shrink для правой части */
+  .about__summary > span,
+  .about__summary::after {
+    flex-shrink: 1;
+  }
+
+  /* Чуть мягче отображаем дефисную часть */
+  .about__summary {
+    font-family: "Raleway", sans-serif;
+  }
+}
+
+/*фикс хедера*/
+/* --- Фикс шапки на мобильных: чтобы пункты не вылазили --- */
+/* ==== Мобильно фиксируем шапку (перенос ссылок) ==== */
+@media (max-width: 560px) {
+  .header .header__links-list {           /* ↑ специфичность */
+    display: flex;
+    flex-wrap: wrap !important;           /* перебиваем nowrap */
+    justify-content: flex-start;
+    gap: 6px 12px;
+    width: 100%;
+    min-width: 0;
+  }
+  .header .header__links-list-item {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .header .header__link {
+    white-space: normal !important;       /* перебиваем nowrap */
+    flex-shrink: 1;
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 1.3;
+    text-align: left;
+  }
+
+  /* немного воздуха по краям у шапки */
+  .header { margin-inline: clamp(12px, 6vw, 24px); }
+}
+
+/* ==== Мобильно фиксируем "Подробнее", чтобы не вылезало ==== */
+/* --- HEADER: фикс ширины и воздуха по краям --- */
+.header{
+  width: 100%;
+  max-width: none;
+  margin: 0;                         /* убрали сужающие внешние поля */
+  padding-inline: clamp(16px, 4vw, 24px);  /* воздух внутри */
+  box-sizing: border-box;
+}
+
+/* мобильная сетка + перенос ссылок */
+@media screen and (max-width: 768px) {
+  .header {
+    margin: 0 !important;                     /* сброс внешних отступов */
+    width: 100%;
+    max-width: none;
+    padding-inline: clamp(16px, 5vw, 28px);
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .header__links-list{
+    flex-wrap: wrap !important;
+    gap: 6px 12px;
+    width: 100%;
+    min-width: 0;
+  }
+  .header .header__link{
+    white-space: normal !important;  /* перебиваем nowrap */
+    word-break: break-word;
+    flex-shrink: 1;
+    font-size: clamp(14px, 3.5vw, 16px);
+    line-height: 1.3;
+    text-align: left;
+  }
+}
+@media (max-width: 768px) {
+  .header .address{
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  .header .address a{
+    word-break: break-all; /* ломаем длинный e-mail по любому месту */
+  }
 }
