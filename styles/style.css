@@ -6,6 +6,11 @@ body {
   line-height: 1.5;
   margin: var(--main-indignation);
   padding: var(--main-indignation);
+  /*центрирование*/
+   max-width: clamp(320px, 92vw, 1200px);
+  margin-inline: auto;      /* центр по горизонтали */
+  padding-inline: 16px;     /* внутренние отступы у краёв */
+
 }
 
 a {
@@ -24,7 +29,7 @@ body::before {
   position: fixed;
   inset: 0; 
   background: var(--img-bg) center/cover no-repeat; 
-  opacity: 0.3;
+  opacity: 0.12;
   z-index: -1;
 }
 
@@ -65,75 +70,95 @@ body::before {
 
 .header {
   display: grid;
-  grid-template-columns: min-content 1fr 1fr 1fr;
+  grid-template-columns: min-content 1fr 1fr 1fr; /* твоя сетка на 4 колонки */
   align-items: center;
-  padding: 20px 24px;
+  gap: clamp(8px, 2vw, 16px);
+
+  /* ниже и плотнее */
+  padding: clamp(8px, 1.5vw, 14px) clamp(16px, 2.4vw, 24px);
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: color-mix(in srgb, #ffffff 78%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+
+  border-bottom: 1px solid rgba(0, 0, 0, .06);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .06);
 }
 
 .header__menu {
   display: flex;
   justify-self: center;
+  min-width: 0;                 /* чтобы меню не «толкало» сетку */
 }
 
 .header__links-list {
   display: flex;
-  list-style-type: circle;
-  gap: 20px;
-  margin: 0 12px 5px 0;
+  align-items: center;
+  flex-wrap: nowrap;            /* всегда в одну строку */
+  gap: clamp(14px, 2.2vw, 22px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+/* мягкий reset для ссылок внутри пунктов */
 .header__links-list-item a {
-  font-family: "Arial", "Helvetica", sans-serif;
-  font-size: 1.0rem;
-  color: #2d2d2d;
   text-decoration: none;
+  color: inherit;
   background: none;
   -webkit-text-fill-color: initial;
   text-shadow: none;
   filter: none;
-  transition: color 0.3s ease, transform 0.2s ease;
+  transition: color .25s ease;
 }
 
 .header__links-list-item a:hover {
-  color: #000;
-  transform: scale(1.05);
+  color: inherit; /* цвет контролируем через .header__link */
 }
 
 .header__links-list-item_no-bullit {
-  list-style-type: none;
-  text-decoration: none;
+  list-style: none;
 }
 
+/* основной стиль пункта меню */
 .header__link {
   position: relative;
-  color: #000;
+  display: inline-block;
+  color: #1f2937;
   font-family: "Raleway", sans-serif;
-  font-size: 18px;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-size: clamp(14px, 1vw, 17px); /* чуть меньше */
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: .02em;        /* тише трекинг */
+  white-space: nowrap;          /* не переносить слова */
+  padding: 6px 2px;
   text-decoration: none;
-  letter-spacing: 1px;
-  padding: 5px 10px;
-  transition: color 0.3s ease;
-}
-
-.header__link:hover {
-  color: #2441b6; 
+  transition: color .25s ease;
 }
 
 .header__link::after {
   content: "";
   position: absolute;
   left: 0;
+  right: 0;
   bottom: -2px;
-  width: 0%;
   height: 2px;
   background-color: #2441b6;
-  transition: width 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+
+.header__link:hover {
+  color: #2441b6;
 }
 
 .header__link:hover::after {
-  width: 100%;
+  transform: scaleX(1);
 }
 
 .header__link_active {
@@ -143,10 +168,11 @@ body::before {
 
 .header__logo {
   display: block;
-  max-width: clamp(120px, 12vw, 200px); 
-  margin-inline: clamp(8px, 3vw, 40px); 
+  max-width: clamp(96px, 7.5vw, 140px); /* компактнее логотип */
+  margin-inline: clamp(8px, 2vw, 24px);
   height: auto;
 }
+
 
 .address {
   font-style: normal; 
@@ -220,7 +246,7 @@ body::before {
 }
 
 .cover__line_left {
- margin-right: clamp(2.5rem, -10.8824rem + 50.9804vw, 35rem);
+ margin-right: 200px;
 }
 
 .cover__line_right {
@@ -298,12 +324,17 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 
 .card {
   position: relative;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  z-index: 1;
-  padding: 51px 40px 48px;
   justify-content: space-between;
+
+  /* Квадрат */
+  aspect-ratio: 1 / 1;
+
+  /* Размер по ширине (можно подстроить) */
+  width: clamp(260px, 24vw, 320px);
+
+  padding: 24px;                 /* уменьшил, чтобы текст не “съедал” высоту */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -313,7 +344,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
 
-.card--type-asscher   { background-image: url(../images/Cutting_forms/Asscher.jpg);  width: 100%; }
+.card--type-asscher   { background-image: url(../images/Cutting_forms/Asscher.jpg);  }
 .card--type-baguette  { background-image: url(../images/Cutting_forms/Baguette.jpg); }
 .card--type-cushion   { background-image: url(../images/Cutting_forms/Cushion.jpg); }
 .card--type-emerald   { background-image: url(../images/Cutting_forms/Emerald.jpg); }
@@ -338,7 +369,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 .card--type-radiant,
 .card--type-round,
 .card--type-trilliant {
-  width: 313px;
+ /* width: 313px;*/
   
 }
 
@@ -420,6 +451,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   font-weight: 700;
   line-height: 46.96px;
   text-transform: uppercase;
+  margin-top: -140px; /*переделать*/
 }
 
 .about__column-text {
@@ -518,6 +550,70 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   color: #000;
   transform: scale(1.05) rotate(-1deg);
 }
+
+
+/* ===== ТИПОГРАФИКА ФУТЕРА — аккуратней и ровнее ===== это под вопросом*/
+
+/* общий отступ футера, без «дыры» сверху/снизу */
+.footer {
+  padding-block: clamp(20px, 4vw, 48px);
+  gap: clamp(16px, 4vw, 32px);
+}
+
+/* адрес слева — поменьше, читабельнее */
+.footer address {
+  font-family: 'Caveat', cursive;
+  font-weight: 500;
+  font-size: clamp(14px, 1.0vw, 16px);
+  line-height: 1.6;
+  color: #2b2b2b;
+}
+
+/* центральное меню — без background-clip (он делает буквы жирнее),
+   равномерный clamp и нормальная межбуквенная */
+.footer__menu-link {
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: initial;
+  text-shadow: none;
+  filter: none;
+
+  font-family: "Arial", sans-serif;
+  font-weight: 600;
+  font-size: clamp(16px, 1.2vw, 20px);   /* было до 1.6rem — уменьшили */
+  letter-spacing: .015em;
+  color: #111;
+  transition: color .2s ease, text-underline-offset .2s ease;
+}
+
+.footer__menu-link:hover {
+  color: #2441b6;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  transform: none; /* без «подпрыгивания» */
+}
+
+/* иконки справа — поменьше и равномерные отступы */
+.footer__social-list {
+  gap: clamp(16px, 2.2vw, 28px);
+}
+
+.footer__social-list-item {
+  width: clamp(28px, 2.6vw, 36px);
+}
+.footer__social-list-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* десктоп: сетка остаётся 1fr | auto | 1fr, но текст не такой громоздкий */
+@media (min-width: 1024px) {
+  .footer {
+    grid-template-columns: 1fr auto 1fr;
+  }
+}
+
 
 .oplata {
   background: 
@@ -662,32 +758,118 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   transform: translateY(-2px);
 }
 
-.company__text {
-  display: inline-block;
-  padding: 0.25em 0.75em;
-  margin-left: 0.25em;
-  border-radius: 8px;
-  background-color: var(--blue-color);
+/* === FIX: центрирование модальных окон и белая версия для карточек === */
+
+/* Центрируем все модалки одинаково */
+.modal[open] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inset: 0;
+  margin: 0;
+}
+
+/* Общий фон блюра уже есть, просто усилим */
+.modal::backdrop {
+  backdrop-filter: blur(6px);
+}
+
+/* Белый вариант модалки (например, "Кушон — подробности") */
+.modal--light {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Чтобы текст и кнопки в белой модалке не выглядели тёмными */
+.modal--light .modal__close {
+  background: #000;
   color: #fff;
-  font-weight: 500;
-  font-size: 0.95em;
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.company__text:hover {
-  background-color: var(--accent-color);
-  transform: translateY(-2px);
+.modal--light .modal__close:hover {
+  background: #333;
 }
 
-.company__text:active {
-  transform: translateY(0);
+/* === END FIX === */
+/* CTA: «Перейти к сведениям…» — стеклянный синий металлик */
+.company__text{
+  --accent: var(--accent-color, #1e90ff);
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:700;
+  letter-spacing:.02em;
+  font-size:clamp(0.95rem, 1.05vw, 1.05rem);
+  text-decoration:none;
+  color:#fff;
+
+  /* синий металлик + лёгкое стекло */
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--accent) 18%, #d9e6ff) 0%,
+      color-mix(in srgb, var(--accent) 70%, #2d4db7) 100%);
+  border:1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow:
+    0 8px 18px rgba(30,144,255,.24),
+    inset 0 1px 0 rgba(255,255,255,.7),
+    inset 0 -1px 0 rgba(0,0,0,.15);
+
+  position:relative;
+  overflow:hidden;
+  transition:transform .2s ease, box-shadow .25s ease, background .25s ease;
 }
 
-.company__text:focus {
-  outline: 2px solid var(--accent-color);
-  outline-offset: 3px;
+/* верхний «блик» */
+.company__text::after{
+  content:"";
+  position:absolute; inset:0;
+  background:radial-gradient(120% 120% at 50% -40%, rgba(255,255,255,.35), transparent 60%);
+  pointer-events:none; opacity:.6;
 }
+
+/* «shine»-полоска */
+.company__text::before{
+  content:"";
+  position:absolute; top:0; left:-30%;
+  width:30%; height:100%;
+  transform:skewX(-20deg);
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
+  opacity:0;
+  transition:transform .6s ease, opacity .3s ease;
+}
+
+.company__text:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(30,144,255,.32);
+}
+.company__text:hover::before{
+  opacity:1; transform:translateX(260%) skewX(-20deg);
+}
+
+.company__text:active{ transform:translateY(0); }
+
+.company__text:focus-visible{
+  outline:none;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--accent) 45%, transparent),
+    0 10px 28px rgba(30,144,255,.35);
+}
+
+/* на мобильных — на всю ширину и компактнее */
+@media (max-width: 560px){
+  .company__text{
+    width:100%;
+    padding:12px 16px;
+    font-size:1rem;
+  }
+}
+
 
 .card__pay-btn {
   margin-top: clamp(12px, 2vw, 20px);
@@ -783,58 +965,140 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   pointer-events: none;
 }
 
-.about__feature { margin: 10px 0; }
+/* === ABOUT: обновлённые раскрывашки c «металлик + стекло» === */
 
-.about__details {
-  border-radius: 10px;
-  background: rgba(30,144,255,0.06);
-  box-shadow: inset 0 0 0 1px rgba(30,144,255,0.15);
-  padding: 10px 12px;
+.about__feature{
+  margin: 14px 0;
 }
 
-.about__summary {
+/* Карточка */
+.about__details{
+  --accent: var(--accent-color, #1e90ff);
+
+  border-radius: 14px;
+  padding: 14px 16px;
+
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  background:
+    /* микро «шлифовка» */
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.22) 0 1px,
+      rgba(255,255,255,0) 1px 3px),
+    /* мягкий металлический перелив */
+    linear-gradient(180deg, #eef1f6, #dfe3ea);
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.08),
+    inset 0 .5px 0 rgba(255,255,255,.65),
+    inset 0 -1px 0 rgba(0,0,0,.06);
+  backdrop-filter: blur(2px) saturate(120%);
+  -webkit-backdrop-filter: blur(2px) saturate(120%);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.about__details:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.12), inset 0 .5px 0 rgba(255,255,255,.65);
+}
+/* компактнее карточка + мягкий металлик */
+.about__details{
+  --accent: var(--accent-color, #1e90ff);
+  border-radius: 14px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(255,255,255,.20) 0 1px,
+      rgba(255,255,255,0) 1px 3px),
+    linear-gradient(180deg, #eef1f6, #dfe3ea);
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.08),
+    inset 0 .5px 0 rgba(255,255,255,.6),
+    inset 0 -1px 0 rgba(0,0,0,.06);
+  backdrop-filter: blur(2px) saturate(120%);
+  -webkit-backdrop-filter: blur(2px) saturate(120%);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.about__details:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.10); }
+.about__details[open]{ border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
+
+/* строка заголовка — оставим flex для совместимости */
+.about__summary{
   list-style: none;
   cursor: pointer;
   outline: none;
   user-select: none;
+
   display: flex;
   align-items: baseline;
-  gap: 6px;
+  gap: 10px;
 
   font-family: "Raleway", sans-serif;
-  color: black;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24px;
+  color: #0b1223;
+  font-size: clamp(17px, 1.05vw, 19px);
+  font-weight: 500;
+  line-height: 1.4;
 }
-.about__summary::-webkit-details-marker { display: none; }
-.about__summary::marker { content: ""; }
+.about__summary::-webkit-details-marker{ display:none; }
+.about__summary::marker{ content:""; }
 
-.about__summary::after {
+/* ПИЛЮЛЯ — больше не растягиваем! */
+.about__term{
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+
+  /* ключевая часть — запрет растяжения во flex: */
+  flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
+
+  color: #0b3d91;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-shadow: 0 1px 0 rgba(255,255,255,.45);
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--accent) 12%, #cfe1ff) 0%,
+      color-mix(in srgb, var(--accent) 28%, #bcd1ff) 100%);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 -1px 0 rgba(0,0,0,.08),
+    0 2px 6px rgba(30,144,255,.16);
+}
+
+/* Текст справа: Читать далее / Свернуть */
+.about__summary::after{
   content: "Читать далее";
   margin-left: auto;
-  font-size: 0.9em;
+  font-size: .95em;
   font-weight: 600;
-  color: var(--accent-color, #1e90ff);
+  color: var(--accent, #1e90ff);
   text-decoration: underline;
   transition: color .2s ease, transform .2s ease;
 }
-.about__details[open] .about__summary::after { content: "Свернуть"; }
-.about__summary:hover::after { color: #0f78d1; transform: translateY(-1px); }
+.about__details[open] .about__summary::after{ content: "Свернуть"; }
+.about__summary:hover::after{ color: #0f78d1; transform: translateY(-1px); }
 
-.about__more {
+/* контент */
+.about__more{
   margin-top: 10px;
-  padding-top: 8px;
-  border-top: 1px dashed rgba(30,144,255,0.35);
-
+  padding-top: 10px;
+  border-top: 1px dashed color-mix(in srgb, var(--accent) 32%, transparent);
   font-family: "Raleway", sans-serif;
-  color: black;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24px;
+  color: #1b2430;
+  font-size: clamp(16px, .95vw, 18px);
+  line-height: 1.55;
 }
 
-/*стилизация карточки, дополнительная*/
+/* мобильная подпись короче */
+@media (max-width: 480px){
+  .about__summary::after{ content: "Подробнее"; }
+  .about__details[open] .about__summary::after{ content: "Свернуть"; }
+}
+
 
 /* Оверлей поверх картинки, чтобы текст читался */
 .card::before {
@@ -995,7 +1259,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   animation: cardBackdropIn .2s ease-out;
 }
 
-/* ==== Тёмная тема (если есть) ==== */
+/* ==== Тёмная тема (если есть)
 @media (prefers-color-scheme: dark) {
   .card__modal {
     color: var(--text-on-dark, #f5f5f5);
@@ -1011,7 +1275,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
     background: rgba(0,0,0,.6);
     backdrop-filter: blur(2px);
   }
-}
+}*/
 
 /* ===== Preloader ===== */
 html.is-preloading,
@@ -1099,6 +1363,9 @@ html.is-preloading body { overflow: hidden; }
   .header {
     grid-template-columns: 1fr 1fr;
   }
+  .cover__line_left {
+  margin-right: 70px;
+ }
 
   .header__logo {
     padding-right: 30px;  
@@ -1226,4 +1493,196 @@ html.is-preloading body { overflow: hidden; }
   }
 
   .cover__line_right { margin-left: 10px; }
+}
+
+/* === FIX: центрирование диалогов + белая тема для card__modal и oplata === */
+
+/* Центруем САМ диалог */
+.card__modal[open],
+.oplata[open],
+.modal.modal--video[open] {
+  inset: 0;            /* допускается, чтобы работало во всех браузерах */
+  margin: auto;        /* центр по горизонтали и вертикали */
+  padding: 0;
+  /* display:flex у диалога не нужен */
+}
+
+/* Если хочешь — единые размеры для диалогов */
+.card__modal,
+.oplata,
+.modal.modal--video {
+  max-width: min(92vw, 800px);
+  width: auto;
+}
+
+/* Бэкдроп оставляем как был */
+.card__modal::backdrop,
+.oplata::backdrop,
+.modal.modal--video::backdrop {
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(6px);
+}
+
+
+/* Внутренние отступы для твоих контейнеров */
+.card__modal .card__title,
+.card__modal .card__text,
+.card__modal .modal__close-btn,
+.oplata h3,
+.oplata p,
+.oplata ul,
+.oplata .oplata__content,
+.oplata .form {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Кнопки закрытия/подтверждения на белом фоне — контрастнее */
+.modal__close-btn,
+.oplata .oplata__text-end,
+.oplata .cart__pay-button,
+.modal__close {
+  background: #111;
+  color: #fff;
+  border: 1px solid #111;
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: transform .2s ease, opacity .2s ease, background .2s ease;
+}
+
+.modal__close-btn:hover,
+.oplata .oplata__text-end:hover,
+.oplata .cart__pay-button:hover,
+.modal__close:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+/* Заголовки/текст внутри белых модалок — тёмные */
+.card__modal .card__title,
+.oplata h3 { color: #111; }
+
+.card__modal .card__text,
+.oplata p { color: #222; }
+
+/* Видео-модалка остаётся тёмной (как было) — НЕ меняем её фон */
+.modal.modal--video {
+  background: transparent;  /* сам контейнер прозрачный */
+  border: none;
+  border-radius: 12px;
+  max-width: 900px;
+  width: 92vw;
+  /* её контент уже оформлен у тебя через .modal__content/.modal__video */
+}
+
+/* На всякий случай убираем возможные внешние отступы, которые "тянут" окно вверх */
+.card__modal > *:first-child,
+.oplata > *:first-child {
+  margin-top: 0;
+}
+
+
+/*затемнение карточек на выбор*/
+/* 1) Больше не используем глобальную .overlay */
+.overlay {
+  background: none !important;
+  box-shadow: none !important;
+}
+
+/* 2) На карточках вообще прячем overlay-элемент */
+.card .overlay {
+  display: none !important;
+}
+
+/* 3) Убираем внутреннее затемнение карточек (если нужно полностью «чистое» изображение) */
+.card::before {
+  background: none !important;
+}
+
+/* 4) Если затемнение нужно только на обложке — оставляем ТОЛЬКО там и делаем его слабее */
+.cover > .overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.18) 0%,
+    rgba(0,0,0,.10) 40%,
+    rgba(0,0,0,.05) 100%
+  ) !important;
+  box-shadow: none !important;
+}
+
+/* На всякий случай уберём фон на .cover, если где-то задан */
+.cover {
+  background-color: transparent !important;
+}
+
+/*правки карточек дополнительные*/
+
+/* --- CARD: заголовок-чип и тёмная типографика --- */
+
+/* Чуть больше места сверху под чип */
+.card{
+  padding-top: clamp(56px, 7.2vw, 92px);
+}
+
+/* Заголовок — закрепляем в левом верхнем углу и даём стеклянную плашку */
+.card__title{
+  position: absolute;
+  top: clamp(10px, 1.2vw, 16px);
+  left: clamp(12px, 1.4vw, 20px);
+  margin: 0;
+  padding: .4em .8em;
+  max-width: 80%;
+
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: none;
+  text-decoration: none;
+
+  color: #0f172a !important;             /* тёмный, читаемый цвет */
+  text-shadow: none !important;
+
+  background: linear-gradient(135deg,
+              rgba(255,255,255,.92),
+              rgba(255,255,255,.78));
+  border: 1px solid rgba(16,24,40,.08);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12),
+              inset 0 0 0 1px rgba(255,255,255,.45);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+}
+
+/* Текст — тоже тёмный, без свечения */
+.card__text{
+  color: #0f172a !important;
+  text-shadow: none !important;
+  /* лёгкая подложка для читабельности длинных описаний */
+  background: linear-gradient(90deg,
+              rgba(255,255,255,.82),
+              rgba(255,255,255,.42));
+  padding: .35em .6em;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 86%;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+/* На всякий случай: если где-то остался белый цвет у заголовков/текста в карточке */
+.card h3, .card p { color: #0f172a; }
+
+/* Оверлей в карточках держим выключенным, чтобы фон камня был чистым */
+.card .overlay{ display:none !important; }
+/* (если убирал затемнение через ::before — оставляем как есть)
+.card::before{ background: none !important; }
+*/
+
+/* Чуть более уверенная типографика на кнопках карточек */
+.card .button,
+.card .card__more-btn,
+.card .card__pay-btn{
+  font-weight: 700;
 }
