@@ -64,19 +64,3 @@
   --eco-border: rgba(47, 162, 90, .35);
   --eco-shadow: rgba(47, 162, 90, .18);
 }
-
-
-
-/* === Section header color variables (about & product) === */
-:root {
-  /* 'О нас' — морской градиент */
-  --about-wave-start: #b7dfff;
-  --about-wave-end:   #2c6fb8;
-  --about-icon:       #2c6fb8;
-
-  /* 'О нашей продукции' — бриллиантовый холодный градиент */
-  --product-wave-start: #e8f6ff;
-  --product-wave-mid:   #b0d0f9;
-  --product-wave-end:   #f5faff;
-  --product-icon:       #6ea9da;
-}
