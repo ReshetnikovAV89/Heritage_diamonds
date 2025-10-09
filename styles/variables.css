@@ -22,3 +22,45 @@
     linear-gradient(to bottom, #e7e7e7 0.01%, #115ee2);
     --about-logo-w: 200px;
 }
+
+
+/* === Heritage: цветовые переменные для «пилюль» (about__term) === */
+:root {
+  /* Общая интенсивность блика */
+  --pill-sheen-opacity: .55; /* можно подкрутить 0.45..0.70 */
+
+  /* Чистота — ледяной голубой */
+  --purity-fg: #0b3d91;
+  --purity-start: rgba(183, 223, 255, .88);
+  --purity-end:   rgba( 75, 142, 215, .82);
+  --purity-border: rgba(75, 142, 215, .35);
+  --purity-shadow: rgba(75, 142, 215, .18);
+
+  /* Цвет — фиолетово‑сиреневый */
+  --color-fg: #2f216d;
+  --color-start: rgba(196, 182, 255, .88);
+  --color-end:   rgba(122,  96, 224, .82);
+  --color-border: rgba(122, 96, 224, .35);
+  --color-shadow: rgba(122, 96, 224, .18);
+
+  /* Размер — золотисто‑янтарный */
+  --size-fg: #6a4300;
+  --size-start: rgba(255, 215, 143, .90);
+  --size-end:   rgba(240, 167,  26, .84);
+  --size-border: rgba(240, 167, 26, .35);
+  --size-shadow: rgba(240, 167, 26, .20);
+
+  /* Цена — серебристо‑платиновый (деликатнее) */
+  --price-fg: #1b2735;
+  --price-start: rgba(232, 232, 232, .92);
+  --price-end:   rgba(191, 197, 202, .86);
+  --price-border: rgba(106, 115, 124, .30);
+  --price-shadow: rgba( 60,  70,  80, .14);
+
+  /* Экологичность — зелёный «морской» */
+  --eco-fg: #0b3a1e;
+  --eco-start: rgba(177, 232, 176, .90);
+  --eco-end:   rgba( 47, 162,  90, .84);
+  --eco-border: rgba(47, 162, 90, .35);
+  --eco-shadow: rgba(47, 162, 90, .18);
+}
