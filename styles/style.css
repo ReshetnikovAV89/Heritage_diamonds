@@ -10,7 +10,6 @@ dialog{
   overflow: auto;
 } 
 
-/* Базовая версия для мобилки — комфортная, не во всю ширину */
 body {
   font-family: "Arial", sans-serif;
   font-size: var(--font-size-base);
@@ -23,7 +22,6 @@ body {
   margin-inline: auto;
 }
 
-/* Планшеты: делаем шире */
 @media (min-width: 561px) and (max-width: 768px) {
   body {
     max-width: 98vw;
@@ -31,15 +29,12 @@ body {
   }
 }
 
-/* Десктопы: максимальная ширина контента */
 @media (min-width: 1024px) {
   body {
     max-width: 1600px;
     padding-inline: 32px;
   }
 }
-
-
 
 a {
   text-decoration: none;
@@ -98,11 +93,11 @@ body::before {
 
 .header {
   display: grid;
-  grid-template-columns: min-content 1fr 1fr 1fr; /* твоя сетка на 4 колонки */
+  grid-template-columns: min-content 1fr 1fr 1fr; 
   align-items: center;
   gap: clamp(8px, 2vw, 16px);
 
-  /* ниже и плотнее */
+  
   padding: clamp(8px, 1.5vw, 14px) clamp(16px, 2.4vw, 24px);
 
   position: sticky;
@@ -121,20 +116,19 @@ body::before {
 .header__menu {
   display: flex;
   justify-self: center;
-  min-width: 0;                 /* чтобы меню не «толкало» сетку */
+  min-width: 0;                 
 }
 
 .header__links-list {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;            /* всегда в одну строку */
+  flex-wrap: nowrap;            
   gap: clamp(14px, 2.2vw, 22px);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-/* мягкий reset для ссылок внутри пунктов */
 .header__links-list-item a {
   text-decoration: none;
   color: inherit;
@@ -146,24 +140,23 @@ body::before {
 }
 
 .header__links-list-item a:hover {
-  color: inherit; /* цвет контролируем через .header__link */
+  color: inherit; 
 }
 
 .header__links-list-item_no-bullit {
   list-style: none;
 }
 
-/* основной стиль пункта меню */
 .header__link {
   position: relative;
   display: inline-block;
   color: #1f2937;
   font-family: "Raleway", sans-serif;
-  font-size: clamp(14px, 1vw, 17px); /* чуть меньше */
+  font-size: clamp(14px, 1vw, 17px); 
   font-weight: 600;
   text-transform: none;
-  letter-spacing: .02em;        /* тише трекинг */
-  white-space: nowrap;          /* не переносить слова */
+  letter-spacing: .02em;        
+  white-space: nowrap;          
   padding: 6px 2px;
   text-decoration: none;
   transition: color .25s ease;
@@ -197,11 +190,10 @@ body::before {
 
 .header__logo {
   display: block;
-  max-width: clamp(96px, 7.5vw, 140px); /* компактнее логотип */
+  max-width: clamp(96px, 7.5vw, 140px); 
   margin-left: 40px;
   height: auto;
 }
-
 
 .address {
   font-style: normal; 
@@ -324,32 +316,76 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   margin-top: 2em;
 }
 
-.lots__heading {
-  /*padding: 80px 0 0px 176px;*/
-  color: #000;
-  font-size: var(--font-size-xlarge);
-  font-weight: 700;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1.2s ease-out forwards;
-  margin-top: 20px;
-  
+/* Заголовок секции */
+.lots__heading{
+  display:inline-block !important;
+  position:relative;
+  margin:40px auto 32px !important;
+  padding:12px 20px !important;
+
+  font-family:"Playfair Display", serif !important;
+  font-weight:700 !important;
+  text-transform:uppercase !important;
+  letter-spacing:.08em !important;
+  font-size:clamp(24px,2vw,36px) !important;
+
+  /* «бриллиантовый» перелив текста */
+  background:linear-gradient(180deg,#ffffff 15%,#dbe9ff 90%) !important;
+  -webkit-background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  text-shadow:0 1px 2px rgba(255,255,255,.6), 0 3px 8px rgba(30,144,255,.35) !important;
+
+  border-radius:16px !important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5), 0 4px 14px rgba(0,0,0,.08) !important;
+
+  /* твоя анимация остаётся */
+  opacity:0;
+  transform:translateY(30px);
+  animation:fadeInUp 1.2s ease-out forwards;
 }
 
-.lots__card-list {
-  display: flex;
-  flex-wrap: wrap;    
-  gap: 24px;            
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Список карточек — ровная сетка с центровкой */
+.lots__card-list{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
+  gap:32px !important;
+  list-style:none !important;
+  padding:0 !important;
+  margin:0 auto !important;
+  max-width:1400px !important;
 }
 
-.lots__card-list-item {
-  flex: 1 1 calc(25% - 20px); 
-  box-sizing: border-box;    
+/* Элементы списка: 4 в ряд на десктопе */
+.lots__card-list-item{
+  display:flex !important;
+  justify-content:center !important;
+  flex:1 1 calc(25% - 32px) !important;
+  max-width:calc(25% - 32px) !important;
+  box-sizing:border-box !important;
 }
+
+/* Планшет — 2 в ряд */
+@media (max-width:1024px){
+  .lots__card-list-item{
+    flex:1 1 calc(45% - 24px) !important;
+    max-width:calc(45% - 24px) !important;
+  }
+}
+
+/* Мобилка — 1 в ряд + компактнее заголовок */
+@media (max-width:560px){
+  .lots__card-list-item{
+    flex:1 1 100% !important;
+    max-width:100% !important;
+  }
+  .lots__heading{
+    font-size:clamp(20px,6vw,28px) !important;
+    margin:24px auto 20px !important;
+    padding:8px 14px !important;
+  }
+}
+
 
 .card {
   position: relative;
@@ -357,13 +393,13 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   flex-direction: column;
   justify-content: space-between;
 
-  /* Квадрат */
+  
   aspect-ratio: 1 / 1;
 
-  /* Размер по ширине (можно подстроить) */
+  
   width: clamp(260px, 24vw, 320px);
 
-  padding: 24px;                 /* уменьшил, чтобы текст не “съедал” высоту */
+  padding: 24px;                 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -464,7 +500,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   font-weight: 700;
   line-height: 46.96px;
   text-transform: uppercase;
-  margin-top: -140px; /*переделать*/
+  margin-top: -140px; 
 }
 
 .about__column-text {
@@ -564,16 +600,11 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   transform: scale(1.05) rotate(-1deg);
 }
 
-
-/* ===== ТИПОГРАФИКА ФУТЕРА — аккуратней и ровнее ===== это под вопросом*/
-
-/* общий отступ футера, без «дыры» сверху/снизу */
 .footer {
   padding-block: clamp(20px, 4vw, 48px);
   gap: clamp(16px, 4vw, 32px);
 }
 
-/* адрес слева — поменьше, читабельнее */
 .footer address {
   font-family: 'Caveat', cursive;
   font-weight: 500;
@@ -582,8 +613,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   color: #2b2b2b;
 }
 
-/* центральное меню — без background-clip (он делает буквы жирнее),
-   равномерный clamp и нормальная межбуквенная */
 .footer__menu-link {
   background: none;
   -webkit-background-clip: initial;
@@ -593,7 +622,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 
   font-family: "Arial", sans-serif;
   font-weight: 600;
-  font-size: clamp(16px, 1.2vw, 20px);   /* было до 1.6rem — уменьшили */
+  font-size: clamp(16px, 1.2vw, 20px);   
   letter-spacing: .015em;
   color: #111;
   transition: color .2s ease, text-underline-offset .2s ease;
@@ -603,10 +632,9 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   color: #2441b6;
   text-decoration: underline;
   text-underline-offset: .2em;
-  transform: none; /* без «подпрыгивания» */
+  transform: none; 
 }
 
-/* иконки справа — поменьше и равномерные отступы */
 .footer__social-list {
   gap: clamp(16px, 2.2vw, 28px);
 }
@@ -620,13 +648,11 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   display: block;
 }
 
-/* десктоп: сетка остаётся 1fr | auto | 1fr, но текст не такой громоздкий */
 @media (min-width: 1024px) {
   .footer {
     grid-template-columns: 1fr auto 1fr;
   }
 }
-
 
 .oplata {
   background: 
@@ -745,13 +771,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   align-items: center;
   padding: 0;
 }
-/*
-.modal__video {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-}*/
 
 .modal__close {
   margin: 12px auto;
@@ -771,9 +790,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   transform: translateY(-2px);
 }
 
-/* === FIX: центрирование модальных окон и белая версия для карточек === */
-
-/* Центрируем все модалки одинаково */
 .modal[open] {
   display: flex;
   justify-content: center;
@@ -782,19 +798,16 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   margin: 0;
 }
 
-/* Общий фон блюра уже есть, просто усилим */
 .modal::backdrop {
   backdrop-filter: blur(6px);
 }
 
-/* Белый вариант модалки (например, "Кушон — подробности") */
 .modal--light {
   background: #fff;
   color: #000;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45);
 }
 
-/* Чтобы текст и кнопки в белой модалке не выглядели тёмными */
 .modal--light .modal__close {
   background: #000;
   color: #fff;
@@ -804,8 +817,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   background: #333;
 }
 
-/* === END FIX === */
-/* CTA: «Перейти к сведениям…» — стеклянный синий металлик */
 .company__text{
   --accent: var(--accent-color, #1e90ff);
 
@@ -822,7 +833,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   text-decoration:none;
   color:#fff;
 
-  /* синий металлик + лёгкое стекло */
+  
   background:
     linear-gradient(180deg,
       color-mix(in srgb, var(--accent) 18%, #d9e6ff) 0%,
@@ -838,7 +849,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   transition:transform .2s ease, box-shadow .25s ease, background .25s ease;
 }
 
-/* верхний «блик» */
 .company__text::after{
   content:"";
   position:absolute; inset:0;
@@ -846,7 +856,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   pointer-events:none; opacity:.6;
 }
 
-/* «shine»-полоска */
 .company__text::before{
   content:"";
   position:absolute; top:0; left:-30%;
@@ -874,7 +883,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
     0 10px 28px rgba(30,144,255,.35);
 }
 
-/* на мобильных — на всю ширину и компактнее */
 @media (max-width: 560px){
   .company__text{
     width:100%;
@@ -882,7 +890,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
     font-size:1rem;
   }
 }
-
 
 .card__pay-btn {
   margin-top: clamp(12px, 2vw, 20px);
@@ -978,13 +985,10 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   pointer-events: none;
 }
 
-/* === ABOUT: обновлённые раскрывашки c «металлик + стекло» === */
-
 .about__feature{
   margin: 14px 0;
 }
 
-/* Карточка */
 .about__details{
   --accent: var(--accent-color, #1e90ff);
 
@@ -993,11 +997,11 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 
   border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
   background:
-    /* микро «шлифовка» */
+    
     repeating-linear-gradient(90deg,
       rgba(255,255,255,.22) 0 1px,
       rgba(255,255,255,0) 1px 3px),
-    /* мягкий металлический перелив */
+    
     linear-gradient(180deg, #eef1f6, #dfe3ea);
   box-shadow:
     0 8px 24px rgba(0,0,0,.08),
@@ -1012,7 +1016,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   transform: translateY(-1px);
   box-shadow: 0 10px 28px rgba(0,0,0,.12), inset 0 .5px 0 rgba(255,255,255,.65);
 }
-/* компактнее карточка + мягкий металлик */
+
 .about__details{
   --accent: var(--accent-color, #1e90ff);
   border-radius: 14px;
@@ -1034,7 +1038,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 .about__details:hover{ transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.10); }
 .about__details[open]{ border-color: color-mix(in srgb, var(--accent) 42%, transparent); }
 
-/* строка заголовка — оставим flex для совместимости */
 .about__summary{
   list-style: none;
   cursor: pointer;
@@ -1054,7 +1057,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 .about__summary::-webkit-details-marker{ display:none; }
 .about__summary::marker{ content:""; }
 
-/* ПИЛЮЛЯ — больше не растягиваем! */
 .about__term{
   display: inline-flex;
   align-items: center;
@@ -1062,7 +1064,7 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   border-radius: 999px;
   white-space: nowrap;
 
-  /* ключевая часть — запрет растяжения во flex: */
+  
   flex: 0 0 auto;
   width: auto;
   max-width: max-content;
@@ -1082,7 +1084,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
     0 2px 6px rgba(30,144,255,.16);
 }
 
-/* Текст справа: Читать далее / Свернуть */
 .about__summary::after{
   content: "Читать далее";
   margin-left: auto;
@@ -1099,7 +1100,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 }
 .about__summary:hover::after{ color: #0f78d1; transform: translateY(-1px); }
 
-/* контент */
 .about__more{
   margin-top: 10px;
   padding-top: 10px;
@@ -1110,7 +1110,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   line-height: 1.55;
 }
 
-/* мобильная подпись короче */
 @media (max-width: 480px){
   .about__summary::after{ content: "Подробнее"; 
   white-space: nowrap;
@@ -1119,11 +1118,8 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   white-space: nowrap;
 }
 
-
 }
 
-
-/* Оверлей поверх картинки, чтобы текст читался */
 .card::before {
   content: "";
   position: absolute;
@@ -1136,14 +1132,11 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   z-index: 0;
 }
 
-/* контент поверх оверлея */
 .card > * { position: relative; z-index: 1; }
 
-/* заголовок/текст */
 .card__title,
 .card__text { color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.35); }
 
-/* «Читать далее / Свернуть» внутри карточки */
 .card__details {
   margin-top: 8px;
   border-radius: 10px;
@@ -1188,7 +1181,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   line-height: 1.35;
 }
 
-/* чуть подсветим карточку при ховере */
 .card:hover::before {
   background:
     linear-gradient(180deg,
@@ -1223,9 +1215,8 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   text-decoration: underline;
 }
 
-/* ==== Модалки карточек — базовые стили ==== */
 .card__more-btn {
-  /* наследует общий .button, поэтому — только нюансы */
+  
   white-space: nowrap;
 }
 
@@ -1243,7 +1234,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   overflow: hidden;
 }
 
-/* Внутренние отступы и типографика */
 .card__modal .card__title {
   font-size: clamp(18px, 2.2vw, 22px);
   line-height: 1.25;
@@ -1258,7 +1248,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   margin: 0;
 }
 
-/* Нижняя панель с кнопкой закрытия */
 .card__modal .modal__close-btn {
   width: 100%;
   border-radius: 0;
@@ -1266,7 +1255,6 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   padding: 14px 18px;
 }
 
-/* ==== Анимация открытия/закрытия ==== */
 .card__modal[open] {
   animation: cardModalIn .18s ease-out;
 }
@@ -1275,32 +1263,12 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
   to   { transform: translateY(0);   opacity: 1; }
 }
 
-/* ==== Затемнение фона ==== */
 .card__modal::backdrop {
   background: rgba(0,0,0,.42);
   backdrop-filter: blur(2px);
   animation: cardBackdropIn .2s ease-out;
 }
 
-/* ==== Тёмная тема (если есть)
-@media (prefers-color-scheme: dark) {
-  .card__modal {
-    color: var(--text-on-dark, #f5f5f5);
-    background: var(--surface-elevated-dark, #1a1a1a);
-    box-shadow:
-      0 10px 25px rgba(0,0,0,.6),
-      0 2px 8px rgba(0,0,0,.4);
-  }
-  .card__modal .modal__close-btn {
-    border-top-color: rgba(255,255,255,.08);
-  }
-  .card__modal::backdrop {
-    background: rgba(0,0,0,.6);
-    backdrop-filter: blur(2px);
-  }
-}*/
-
-/* ===== Preloader ===== */
 html.is-preloading,
 html.is-preloading body { overflow: hidden; }
 
@@ -1333,7 +1301,6 @@ html.is-preloading body { overflow: hidden; }
   text-transform: uppercase;
 }
 
-/* Квадратики */
 .preloader__squares {
   --size: 14px;
   --gap: 10px;
@@ -1359,22 +1326,17 @@ html.is-preloading body { overflow: hidden; }
 .preloader__square:nth-child(3) { animation-delay: .30s; }
 .preloader__square:nth-child(4) { animation-delay: .45s; }
 
-
-
-/* Скрытие после загрузки */
 .preloader--hide {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-/* ==== Мобильные детали ==== */
 @media (max-width: 480px) {
   .card__modal .card__title { padding: 16px 16px 6px; }
   .card__modal .card__text  { padding: 0 16px 10px; }
 }
 
-/* ==== Уважение к предпочитаемому снижению анимации ==== */
 @media (prefers-reduced-motion: reduce) {
   .card__modal[open],
   .card__modal::backdrop {
@@ -1518,12 +1480,6 @@ html.is-preloading body { overflow: hidden; }
   .cover__line_right { margin-left: 10px; }
 }
 
-
-
-/* Центруем САМ диалог */
-
-
-/* Если хочешь — единые размеры для диалогов */
 .card__modal,
 .oplata,
 .modal.modal--video {
@@ -1531,7 +1487,6 @@ html.is-preloading body { overflow: hidden; }
   width: auto;
 }
 
-/* Бэкдроп оставляем как был */
 .card__modal::backdrop,
 .oplata::backdrop,
 .modal.modal--video::backdrop {
@@ -1539,8 +1494,6 @@ html.is-preloading body { overflow: hidden; }
   backdrop-filter: blur(6px);
 }
 
-
-/* Внутренние отступы для твоих контейнеров */
 .card__modal .card__title,
 .card__modal .card__text,
 .card__modal .modal__close-btn,
@@ -1553,7 +1506,6 @@ html.is-preloading body { overflow: hidden; }
   padding-right: 20px;
 }
 
-/* Кнопки закрытия/подтверждения на белом фоне — контрастнее */
 .modal__close-btn,
 .oplata .oplata__text-end,
 .oplata .cart__pay-button,
@@ -1575,40 +1527,30 @@ html.is-preloading body { overflow: hidden; }
   opacity: 0.95;
 }
 
-/* Заголовки/текст внутри белых модалок — тёмные */
 .card__modal .card__title,
 .oplata h3 { color: #111; }
 
 .card__modal .card__text,
 .oplata p { color: #222; }
 
-/* Видео-модалка остаётся тёмной (как было) — НЕ меняем её фон */
 .modal.modal--video {
-  background: transparent;  /* сам контейнер прозрачный */
+  background: transparent;  
   border: none;
   border-radius: 12px;
   max-width: 900px;
   width: 92vw;
-  /* её контент уже оформлен у тебя через .modal__content/.modal__video */
+  
 }
 
-/* На всякий случай убираем возможные внешние отступы, которые "тянут" окно вверх */
 .card__modal > *:first-child,
 .oplata > *:first-child {
   margin-top: 0;
 }
 
-
-/*правки карточек дополнительные*/
-
-/* --- CARD: заголовок-чип и тёмная типографика --- */
-
-/* Чуть больше места сверху под чип */
 .card{
   padding-top: clamp(56px, 7.2vw, 92px);
 }
 
-/* Заголовок — закрепляем в левом верхнем углу и даём стеклянную плашку */
 .card__title{
   position: absolute;
   top: clamp(10px, 1.2vw, 16px);
@@ -1623,7 +1565,7 @@ html.is-preloading body { overflow: hidden; }
   text-transform: none;
   text-decoration: none;
 
-  color: #0f172a !important;             /* тёмный, читаемый цвет */
+  color: #0f172a !important;             
   text-shadow: none !important;
 
   background: linear-gradient(135deg,
@@ -1638,11 +1580,10 @@ html.is-preloading body { overflow: hidden; }
   z-index: 2;
 }
 
-/* Текст — тоже тёмный, без свечения */
 .card__text{
   color: #0f172a !important;
   text-shadow: none !important;
-  /* лёгкая подложка для читабельности длинных описаний */
+  
   background: linear-gradient(90deg,
               rgba(255,255,255,.82),
               rgba(255,255,255,.42));
@@ -1654,24 +1595,16 @@ html.is-preloading body { overflow: hidden; }
   backdrop-filter: blur(2px);
 }
 
-/* На всякий случай: если где-то остался белый цвет у заголовков/текста в карточке */
 .card h3, .card p { color: #0f172a; }
 
-/* Оверлей в карточках держим выключенным, чтобы фон камня был чистым */
 .card .overlay{ display:none !important; }
-/* (если убирал затемнение через ::before — оставляем как есть)
-.card::before{ background: none !important; }
-*/
 
-/* Чуть более уверенная типографика на кнопках карточек */
 .card .button,
 .card .card__more-btn,
 .card .card__pay-btn{
   font-weight: 700;
 }
 
-
-/* Typographic comfy text inside dialogs */
 .card__modal .card__text,
 .oplata p,
 .oplata .oplata__content{
@@ -1682,9 +1615,6 @@ html.is-preloading body { overflow: hidden; }
   -webkit-hyphens: auto;
 }
 
-
-/*фикс модалки*/
-/* В модалке заголовок — обычный, без "пилюли" и без absolute */
 .card__modal .card__title{
   position: static !important;
   top: auto; left: auto;
@@ -1707,22 +1637,18 @@ html.is-preloading body { overflow: hidden; }
   overflow-wrap: anywhere;
 }
 
-
-/*фикс вида на мобилке*/
-
-/* --- Фикс длинных строк в карточках "о продукте" --- */
 @media (max-width: 560px) {
   .about__details {
-    font-size: 0.9rem; /* немного меньше весь текст карточки */
+    font-size: 0.9rem; 
   }
 
   .about__summary {
-    flex-wrap: wrap; /* разрешаем перенос внутри строки */
+    flex-wrap: wrap; 
   }
 
-  /* Дефис + текст "— не нужно..." слегка ужимаем */
+  
   .about__summary::before {
-    content: ""; /* резервируем место */
+    content: ""; 
   }
 
   .about__more {
@@ -1730,31 +1656,28 @@ html.is-preloading body { overflow: hidden; }
     line-height: 1.4;
   }
 
-  /* Контейнер тянется, текст не вылазит */
+  
   .about__details,
   .about__summary {
     min-width: 0;
   }
 
-  /* Ставим flex-shrink для правой части */
+  
   .about__summary > span,
   .about__summary::after {
     flex-shrink: 1;
   }
 
-  /* Чуть мягче отображаем дефисную часть */
+  
   .about__summary {
     font-family: "Raleway", sans-serif;
   }
 }
 
-/*фикс хедера*/
-/* --- Фикс шапки на мобильных: чтобы пункты не вылазили --- */
-/* ==== Мобильно фиксируем шапку (перенос ссылок) ==== */
 @media (max-width: 560px) {
-  .header .header__links-list {           /* ↑ специфичность */
+  .header .header__links-list {           
     display: flex;
-    flex-wrap: wrap !important;           /* перебиваем nowrap */
+    flex-wrap: wrap !important;           
     justify-content: flex-start;
     gap: 6px 12px;
     width: 100%;
@@ -1765,31 +1688,28 @@ html.is-preloading body { overflow: hidden; }
     min-width: 0;
   }
   .header .header__link {
-    white-space: normal !important;       /* перебиваем nowrap */
+    white-space: normal !important;       
     flex-shrink: 1;
     font-size: clamp(14px, 3.5vw, 16px);
     line-height: 1.3;
     text-align: left;
   }
 
-  /* немного воздуха по краям у шапки */
+  
   .header { margin-inline: clamp(12px, 6vw, 24px); }
 }
 
-/* ==== Мобильно фиксируем "Подробнее", чтобы не вылезало ==== */
-/* --- HEADER: фикс ширины и воздуха по краям --- */
 .header{
   width: 100%;
   max-width: none;
-  margin: 0;                         /* убрали сужающие внешние поля */
-  padding-inline: clamp(16px, 4vw, 24px);  /* воздух внутри */
+  margin: 0;                         
+  padding-inline: clamp(16px, 4vw, 24px);  
   box-sizing: border-box;
 }
 
-/* мобильная сетка + перенос ссылок */
 @media screen and (max-width: 768px) {
   .header {
-    margin: 0 !important;                     /* сброс внешних отступов */
+    margin: 0 !important;                     
     width: 100%;
     max-width: none;
     padding-inline: clamp(16px, 5vw, 28px);
@@ -1805,7 +1725,7 @@ html.is-preloading body { overflow: hidden; }
     min-width: 0;
   }
   .header .header__link{
-    white-space: normal !important;  /* перебиваем nowrap */
+    white-space: normal !important;  
     word-break: break-word;
     flex-shrink: 1;
     font-size: clamp(14px, 3.5vw, 16px);
@@ -1819,42 +1739,34 @@ html.is-preloading body { overflow: hidden; }
     word-break: break-word;
   }
   .header .address a{
-    word-break: break-all; /* ломаем длинный e-mail по любому месту */
+    word-break: break-all; 
   }
 }
 
-/*фикс центрирования модалки*/
-/* было: .card__modal[open]{ animation: cardModalIn .18s ease-out; } */
-/* стало: */
 .card__modal[open]{
   animation: cardModalFade .18s ease-out;
 }
 
-/* новая анимация — только прозрачность */
 @keyframes cardModalFade{
   from { opacity: 0; }
   to   { opacity: 1; }
 }
-/* Центр по экрану для всех <dialog> */
+
 dialog{
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);        /* не трогаем transform в анимациях */
+  transform: translate(-50%, -50%);        
   max-height: min(85vh, calc(100dvh - 48px));
   overflow: auto;
 }
-
-
-/* --- UPDATE: «металлик + море» для кнопок закрытия модалок
-   и убираем «чёрную плашку» на всю ширину --- */
 
 .card__modal .modal__close-btn{
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin: 14px auto 20px;
-  width: auto;                   /* больше не на всю ширину */
+  width: auto;                   
   border-radius: 12px;
   padding: 10px 18px;
   font-weight: 800;
@@ -1876,7 +1788,6 @@ dialog{
   background: linear-gradient(180deg, #e8f0ff, #cbd9f3);
 }
 
-/* такая же тема для видео-кнопки */
 .modal__close{
   border: 1px solid color-mix(in srgb, #1e90ff 55%, #7aa4ff);
   color: #0b3d91;
@@ -1892,7 +1803,6 @@ dialog{
   background: linear-gradient(180deg, #e8f0ff, #cbd9f3);
 }
 
-/* Центрируем видеомодалку принудительно */
 .modal.modal--video[open]{
   display: flex;
   justify-content: center;
@@ -1901,22 +1811,20 @@ dialog{
   margin: 0;
 }
 
-/* Центрируем кнопку закрытия в карточных модалках */
 .card__modal .modal__close-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 16px auto 24px; /* центрирование и отступы */
+  margin: 16px auto 24px; 
 }
 
-/* Фикс видео-модалки — центрирование и адаптация */
 .modal.modal--video {
   display: flex;
   justify-content: center;
   align-items: center;
   inset: 0;
   margin: 0;
-  background: transparent; /* убираем фон */
+  background: transparent; 
   border: none;
   padding: 0;
 }
@@ -1926,7 +1834,6 @@ dialog{
   backdrop-filter: blur(8px);
 }
 
-/* Видео самоцентрируется и масштабируется под окно */
 .modal__content {
   display: flex;
   justify-content: center;
@@ -1940,13 +1847,12 @@ dialog{
   box-shadow: 0 8px 30px rgba(0,0,0,0.4);
 }
 
-/* === FIX: скрываем видео-модалку по умолчанию === */
 .modal.modal--video {
-  display: none !important;      /* по умолчанию скрыта */
+  display: none !important;      
 }
 
 .modal.modal--video[open] {
-  display: flex !important;      /* показывается только при открытии */
+  display: flex !important;      
   justify-content: center;
   align-items: center;
   inset: 0;
@@ -1956,9 +1862,8 @@ dialog{
   border: none;
 }
 
-/* === ФИКС ЦЕНТРИРОВАНИЯ ВИДЕО-МОДАЛКИ === */
 .modal.modal--video {
-  display: none !important; /* скрыта по умолчанию */
+  display: none !important; 
 }
 
 .modal.modal--video[open] {
@@ -1978,8 +1883,6 @@ dialog{
   z-index: 1000;
 }
 
-/* видео остаётся вписанным и центрируется */
-
 .modal__video {
   max-width: 90vw;
   max-height: 80vh;
@@ -1987,25 +1890,19 @@ dialog{
   box-shadow: 0 8px 30px rgba(0,0,0,0.4);
 }
 
-/* === ФОН КАРТОЧЕК: светлый, не затираем background-image === */
-/* карточка: НЕ трогаем background (чтобы не убить background-image),
-   даём лишь светлую подложку на случай отсутствия картинки */
 .card{
-  background-color: #f9fbff;        /* лёгкий светлый фон-подложка */
+  background-color: #f9fbff;        
   box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-/* если ранее был оверлей через ::before — выключаем полностью */
 .card::before{
-  content: none !important;         /* никаких тёмных градиентов поверх изображения */
+  content: none !important;         
 }
 
-/* если где-то остался div.overlay в карточках — гарантированно скрываем */
 .card .overlay{
   display: none !important;
 }
 
-/* (не обязательно) мягкий «блик», прозрачный — НЕ перекрывает картинку */
 .card::after{
   content:"";
   position:absolute;
@@ -2015,23 +1912,20 @@ dialog{
   background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,.35), transparent 65%);
 }
 
-/* общий стиль видео-диалога */
 dialog.modal--video{
   border: none;
-  background: transparent;          /* контейнер прозрачный */
+  background: transparent;          
   padding: 0;
   max-width: 92vw;
-  width: 92vw;                      /* ширина области содержимого */
+  width: 92vw;                      
 }
 
-/* при открытии — центрируем по экрану как flex-контейнер */
 dialog.modal--video[open]{
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* контент и видео растягиваются аккуратно */
 .modal__content{
   width: 100%;
   max-width: 900px;
@@ -2043,66 +1937,60 @@ dialog.modal--video[open]{
   border-radius: 8px;
 }
 
-/* полупрозрачный тёмный фон */
 .modal--video::backdrop{
   background: rgba(0,0,0,.6);
   backdrop-filter: blur(2px);
 }
 
-/* фикс окна с описанием*/
-
-/* === Fix: широкое модальное на мобилке === */
 @media (max-width: 560px) {
-  /* если используешь <dialog> */
+  
   dialog,
   dialog[open],
   .modal,
   .popup,
   .card__description {
     box-sizing: border-box;
-    max-width: none !important;     /* снимаем чужие ограничения */
-    width: min(96vw, 520px) !important; /* почти во всю ширину, но с полями */
-    min-width: 340px !important;    /* не уже этой границы */
-    margin: 0 auto !important;      /* центрируем */
+    max-width: none !important;     
+    width: min(96vw, 520px) !important; 
+    min-width: 340px !important;    
+    margin: 0 auto !important;      
   }
 
-  /* у внутренностей тоже снимаем max-width, чтобы контент не сжимал родителя */
+  
   .modal__content,
   .popup__content,
   .card__description .content {
     max-width: none !important;
     width: 100% !important;
-    padding: 16px 18px;             /* комфортные отступы */
+    padding: 16px 18px;             
   }
 
-  /* частые причины "узости": flex-центрирование родителя и translate */
+  
   .modal__container,
   .popup__container {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;                   /* запас от краёв экрана */
+    padding: 12px;                   
   }
 
-  /* если модалка позиционируется абсолютно/фиксировано */
+  
   .modal,
   .popup {
     position: fixed;
     left: 50% !important;
     right: auto !important;
     transform: translateX(-50%) !important;
-    inset-block: auto;               /* не давим высоту */
+    inset-block: auto;               
   }
 
-  /* на всякий случай уберём чужой min/max ширины у универсальных обёрток */
+  
   .modal *, .popup * {
     max-width: none !important;
     min-width: 0 !important;
   }
 }
 
-
-/* Icon before the pill label */
 .about__term-icon{
   width: 20px;
   height: 20px;
@@ -2112,10 +2000,8 @@ dialog.modal--video[open]{
   vertical-align: -3px;
 }
 
-
-/* === OVERRIDE (order-safe): «пилюля» берёт цвет из переменных === */
 .about__term{
-  /* дефолт — текущая синяя тема, если модификатора нет */
+  
   --pill-fg: #0b3d91;
   --pill-start: color-mix(in srgb, var(--accent-color, #1e90ff) 12%, #cfe1ff);
   --pill-end:   color-mix(in srgb, var(--accent-color, #1e90ff) 28%, #bcd1ff);
@@ -2133,7 +2019,6 @@ dialog.modal--video[open]{
   isolation: isolate;
 }
 
-/* Верхний мягкий блик — прозрачнее по твоей просьбе */
 .about__term::after{
   content: "";
   position: absolute;
@@ -2143,7 +2028,6 @@ dialog.modal--video[open]{
   pointer-events: none;
 }
 
-/* Модификаторы задают только переменные (не ломают базовую геометрию) */
 .about__term--purity{
   --pill-fg: var(--purity-fg);
   --pill-start: var(--purity-start);
@@ -2184,12 +2068,8 @@ dialog.modal--video[open]{
   --pill-shadow: var(--eco-shadow);
 }
 
-/* Иконка следует текущему цвету текста */
 .about__term-icon{ stroke: currentColor; fill: none; }
 
-
-
-/* === Section headers with icon + decorative line (about / product) === */
 .section-header { display: grid; gap: 8px; justify-items: start; }
 .section-header__title {
   display: flex; align-items: center; gap: 12px;
@@ -2207,4 +2087,84 @@ dialog.modal--video[open]{
 @media (max-width: 560px) {
   .section-header__title { gap: 10px; }
   .section-header__line { width: 200px; }
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: auto;
+  gap: 12px;
+}
+
+.card > * {
+  grid-column: 1 / -1;
+}
+
+.card__title {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  left: auto;
+  margin: 0;
+  padding: .4em .8em;
+  max-width: 80%;
+  text-align: right;
+  font-size: clamp(16px, 1.6vw, 22px);
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-transform: none;
+  color: #0f172a !important;
+  background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.78));
+  border: 1px solid rgba(16,24,40,.08);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.12), inset 0 0 0 1px rgba(255,255,255,.45);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  z-index: 2;
+}
+
+.card__text {
+  color: #0f172a !important;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 120%;
+  background: linear-gradient(90deg, rgba(255,255,255,.82), rgba(255,255,255,.42));
+  padding: .35em .6em;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 86%;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.card .card__more-btn,
+.card .card__pay-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  /*width: calc(50% - 8px);*/
+  padding: 10px 14px;
+  margin-top: 150px;
+ 
+}
+
+.card .card__more-btn {
+  grid-column: 1;
+  margin-right: 8px;
+}
+
+.card .card__pay-btn {
+  grid-column: 2;
+  margin-left: 8px;
+}
+
+@media (max-width: 560px) {
+  .card .card__more-btn,
+  .card .card__pay-btn {
+    width: 100% !important;
+    margin: 130px 0 !important;
+    display: flex;
+  }
 }

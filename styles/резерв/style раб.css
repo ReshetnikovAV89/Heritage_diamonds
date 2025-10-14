@@ -2102,7 +2102,7 @@ dialog.modal--video[open]{
 }
 
 
-/* === Icons inside metallic pills in ABOUT === */
+/* Icon before the pill label */
 .about__term-icon{
   width: 20px;
   height: 20px;
@@ -2110,4 +2110,101 @@ dialog.modal--video[open]{
   flex: 0 0 20px;
   display: inline-block;
   vertical-align: -3px;
+}
+
+
+/* === OVERRIDE (order-safe): «пилюля» берёт цвет из переменных === */
+.about__term{
+  /* дефолт — текущая синяя тема, если модификатора нет */
+  --pill-fg: #0b3d91;
+  --pill-start: color-mix(in srgb, var(--accent-color, #1e90ff) 12%, #cfe1ff);
+  --pill-end:   color-mix(in srgb, var(--accent-color, #1e90ff) 28%, #bcd1ff);
+  --pill-border: color-mix(in srgb, var(--accent-color, #1e90ff) 45%, transparent);
+  --pill-shadow: rgba(30,144,255,.16);
+
+  color: var(--pill-fg);
+  background: linear-gradient(180deg, var(--pill-start), var(--pill-end));
+  border-color: var(--pill-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.60),
+    inset 0 -1px 0 rgba(0,0,0,.08),
+    0 2px 6px var(--pill-shadow);
+  position: relative;
+  isolation: isolate;
+}
+
+/* Верхний мягкий блик — прозрачнее по твоей просьбе */
+.about__term::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 140% at 30% -40%, rgba(255,255,255,var(--pill-sheen-opacity, .50)), transparent 60%);
+  pointer-events: none;
+}
+
+/* Модификаторы задают только переменные (не ломают базовую геометрию) */
+.about__term--purity{
+  --pill-fg: var(--purity-fg);
+  --pill-start: var(--purity-start);
+  --pill-end:   var(--purity-end);
+  --pill-border: var(--purity-border);
+  --pill-shadow: var(--purity-shadow);
+}
+
+.about__term--color{
+  --pill-fg: var(--color-fg);
+  --pill-start: var(--color-start);
+  --pill-end:   var(--color-end);
+  --pill-border: var(--color-border);
+  --pill-shadow: var(--color-shadow);
+}
+
+.about__term--size{
+  --pill-fg: var(--size-fg);
+  --pill-start: var(--size-start);
+  --pill-end:   var(--size-end);
+  --pill-border: var(--size-border);
+  --pill-shadow: var(--size-shadow);
+}
+
+.about__term--price{
+  --pill-fg: var(--price-fg);
+  --pill-start: var(--price-start);
+  --pill-end:   var(--price-end);
+  --pill-border: var(--price-border);
+  --pill-shadow: var(--price-shadow);
+}
+
+.about__term--eco{
+  --pill-fg: var(--eco-fg);
+  --pill-start: var(--eco-start);
+  --pill-end:   var(--eco-end);
+  --pill-border: var(--eco-border);
+  --pill-shadow: var(--eco-shadow);
+}
+
+/* Иконка следует текущему цвету текста */
+.about__term-icon{ stroke: currentColor; fill: none; }
+
+
+
+/* === Section headers with icon + decorative line (about / product) === */
+.section-header { display: grid; gap: 8px; justify-items: start; }
+.section-header__title {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 800; letter-spacing: .02em;
+}
+.section-header__icon { width: 28px; height: 28px; filter: drop-shadow(0 1px 0 rgba(255,255,255,.7)); }
+.section-header__line { width: 240px; height: 12px; opacity: .8; }
+
+.section-header--about .section-header__icon { color: var(--about-icon); }
+.section-header--about .section-header__line path { stroke: url(#about-gradient); }
+
+.section-header--product .section-header__icon { color: var(--product-icon); }
+.section-header--product .section-header__line path { stroke: url(#product-gradient); }
+
+@media (max-width: 560px) {
+  .section-header__title { gap: 10px; }
+  .section-header__line { width: 200px; }
 }

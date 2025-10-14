@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./fonts/fonts.css" />
   <link rel="stylesheet" href="./styles/globals.css" />
   <link rel="stylesheet" href="./styles/style.css" />
-  <link rel="stylesheet" href="./css/animations.css" />
+  <link rel="stylesheet" href="./styles/animations.css" />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="icon" href="./images/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="./images/favicon.ico" sizes="any">
@@ -33,17 +33,25 @@
 </head>
 
 <body>
+
 <!-- Preloader -->
-<div class="preloader" id="preloader" role="status" aria-live="polite" aria-label="Загрузка сайта">
-  <div class="preloader__inner">
-    <div class="preloader__logo" aria-hidden="true">Наследие, создадим вместе...</div>
-    <ul class="preloader__squares" aria-hidden="true">
-      <li class="preloader__square"></li>
-      <li class="preloader__square"></li>
-      <li class="preloader__square"></li>
-      <li class="preloader__square"></li>
-    </ul>
+<div class="preloader preloader--mosaic" id="preloader" aria-hidden="true">
+  <div class="preloader__stage">
+    <img class="reveal-image" src="/images/Preloader/Heart.png" alt="Загрузка…">
+
+    <div class="reveal-grid" id="revealGrid" data-rows="8" data-cols="12"></div>
   </div>
+  <p class="preloader__hint">Создадим вместе...</p>
+</div>
+    
+
+    <div class="preloader__bar" aria-hidden="true">
+      <span class="preloader__bar-fill"></span>
+    </div>
+  </div>
+</div>
+
+
 </div>
   <div class="container">
     <!-- Кнопка корзины -->
@@ -55,7 +63,7 @@
 
       <!-- Корзина -->
       <dialog id="cartModal" class="oplata" aria-labelledby="cart-title">
-        <h3 id="cart-title">Корзина</h3>
+        <h2 id="cart-title">Корзина</h2>
         <ul id="cartItems"></ul>
         <p>Итого: <span id="cartTotal">0</span>₽</p>
         <button id="checkoutButton" class="cart__pay-button" type="button">Оплатить</button>
@@ -144,7 +152,7 @@
 
       <section id="products" class="lots" aria-label="Наша продукция">
         <h2 class="lots__heading">О продукции</h2>
-        <p>Наши бриллианты:</p>
+        <p>Наши бриллианты(виды огранок):</p>
 
 <ul class="lots__card-list">
   <!-- 1. Круглая -->
@@ -153,7 +161,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Круглая</h3>
 
-      <p class="card__text">Огранка "Round cut" </p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-round">
         <span class="button__text">Подробнее</span>
@@ -179,7 +186,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Кушон</h3>
 
-      <p class="card__text">Огранка "Cushion cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-cushion">
         <span class="button__text">Подробнее</span>
@@ -205,7 +211,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Радиант</h3>
 
-      <p class="card__text">Огранка "Radiant cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-radiant">
         <span class="button__text">Подробнее</span>
@@ -231,7 +236,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Принцесса</h3>
 
-      <p class="card__text">Огранка "Princess cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-princess">
         <span class="button__text">Подробнее</span>
@@ -257,7 +261,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Ашер</h3>
 
-      <p class="card__text">Огранка "Asscher cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-asscher">
         <span class="button__text">Подробнее</span>
@@ -283,7 +286,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Сердце</h3>
 
-      <p class="card__text">Огранка "Heart cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-heart">
         <span class="button__text">Подробнее</span>
@@ -309,7 +311,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Триллион</h3>
 
-      <p class="card__text">Огранка "Trilliant cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-trilliant">
         <span class="button__text">Подробнее</span>
@@ -335,7 +336,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Овал</h3>
 
-      <p class="card__text">Огранка "Oval cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-oval">
         <span class="button__text">Подробнее</span>
@@ -361,7 +361,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Груша</h3>
 
-      <p class="card__text">Огранка "Pear cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-pear">
         <span class="button__text">Подробнее</span>
@@ -387,7 +386,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Изумруд</h3>
 
-      <p class="card__text">Огранка "Emerald cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-emerald">
         <span class="button__text">Подробнее</span>
@@ -413,7 +411,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Маркиз</h3>
 
-      <p class="card__text">Огранка "Marquise cut"</p>
 
       <button class="button card__more-btn" type="button" data-modal-target="modal-marquise">
         <span class="button__text">Подробнее</span>
@@ -439,8 +436,6 @@
       <div class="overlay" aria-hidden="true"></div>
       <h3 class="card__title">Багет</h3>
 
-      <p class="card__text">Огранка "Baguette cut"</p>
-
       <button class="button card__more-btn" type="button" data-modal-target="modal-baguette">
         <span class="button__text">Подробнее</span>
       </button>
@@ -460,42 +455,6 @@
   </li>
 </ul>
 
-<script>
-  // Открытие/закрытие модалок «Подробнее» для карточек
-  (function () {
-    const openButtons = document.querySelectorAll('.card__more-btn[data-modal-target]');
-    openButtons.forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const id = btn.getAttribute('data-modal-target');
-        const dlg = document.getElementById(id);
-        if (dlg && typeof dlg.showModal === 'function') {
-          // фикс: блокируем скролл документа и запоминаем позицию
-          lockBody();
-          dlg.showModal();
-          // клик по фону — закрыть
-          dlg.addEventListener('click', (ev) => {
-            if (ev.target === dlg) dlg.close();
-          }, { once: true });
-        }
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      const closeBtn = e.target.closest('[data-modal-close]');
-      if (!closeBtn) return;
-      const dlg = closeBtn.closest('dialog');
-      if (dlg) dlg.close();
-    });
-
-    // Закрытие по ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        document.querySelectorAll('dialog[open]').forEach(dlg => dlg.close());
-      }
-    });
-  })();
-</script>
 
         <a href="#0" class="lots__look-more-link">посмотреть видео обзор (в разработке, прикреплена болванка)</a>
       </section>
@@ -693,232 +652,6 @@
     </footer>
   </div>
 
-  <script>
-    
-  /* === Модалка оплаты и видео === */
-  const modal = document.getElementById("modal");
-  const videoModal = document.getElementById("videoModal");
-  const testPaymentModal = document.getElementById("testPaymentModal");
-  const cartModal = document.getElementById("cartModal");
-
-  const openModalBtn = document.querySelector(".cover .button");
-  if (openModalBtn && modal) {
-    openModalBtn.addEventListener("click", () => modal.showModal());
-  }
-
-  const videoElement = videoModal ? videoModal.querySelector("video") : null;
-  const videoSource = videoElement ? videoElement.querySelector("source") : null;
-  const lookMoreLink = document.querySelector(".lots__look-more-link");
-  if (lookMoreLink && videoModal && videoElement && videoSource) {
-    lookMoreLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (!videoSource.src) {
-        videoSource.src = videoSource.dataset.src;
-        videoElement.load();
-      }
-      lockBody();                 // фикс: не дёргать страницу при открытии
-      videoModal.showModal();
-      // клик по фону — закрыть
-      videoModal.addEventListener('click', (ev) => {
-        if (ev.target === videoModal) videoModal.close();
-      }, { once: true });
-      videoElement.play().catch(() => {});
-    });
-    videoModal.addEventListener("close", () => {
-      videoElement.pause();
-      videoSource.src = "";
-      videoElement.load();
-    });
-  }
-
-  /* === Корзина === */
-  let cart = [];
-  const cartItemsList = document.getElementById("cartItems");
-  const cartTotal = document.getElementById("cartTotal");
-  const cartCount = document.getElementById("cartCount");
-
-  function updateCartDisplay() {
-    if (!cartItemsList || !cartTotal || !cartCount) return;
-    cartItemsList.innerHTML = "";
-    let total = 0;
-    cart.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.textContent = `${item.product} — ${item.amount}₽`;
-      const removeBtn = document.createElement("button");
-      removeBtn.type = "button";
-      removeBtn.setAttribute("aria-label", `Удалить ${item.product} из корзины`);
-      removeBtn.textContent = "❌";
-      removeBtn.style.marginLeft = "10px";
-      removeBtn.style.cursor = "pointer";
-      removeBtn.addEventListener("click", () => {
-        cart.splice(index, 1);
-        updateCartDisplay();
-      });
-      li.appendChild(removeBtn);
-      cartItemsList.appendChild(li);
-      total += item.amount;
-    });
-    cartTotal.textContent = String(total);
-    cartCount.textContent = String(cart.length);
-  }
-
-  document.querySelectorAll(".card__pay-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const product = btn.dataset.product || "Товар";
-      const amount = Number(btn.dataset.amount) || 0;
-      cart.push({ product, amount });
-      updateCartDisplay();
-      if (cartModal) cartModal.showModal();
-    });
-  });
-
-  const headerCartButton = document.getElementById("cartButton");
-  if (headerCartButton && cartModal) {
-    headerCartButton.addEventListener("click", () => {
-      updateCartDisplay();
-      cartModal.showModal();
-      headerCartButton.setAttribute("aria-expanded", "true");
-    });
-    cartModal.addEventListener("close", () => {
-      headerCartButton.setAttribute("aria-expanded", "false");
-    });
-  }
-
-  const checkoutButton = document.getElementById("checkoutButton");
-  if (checkoutButton && testPaymentModal) {
-    checkoutButton.addEventListener("click", () => {
-      if (cart.length === 0) {
-        alert("Корзина пуста!");
-        return;
-      }
-      console.log("Тестовая оплата товаров:", cart);
-      testPaymentModal.showModal();
-      cart = [];
-      updateCartDisplay();
-    });
-  }
-
-  document.querySelectorAll(".button.card__pay-btn-test").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const product = btn.dataset.product || "Товар";
-      const amount = Number(btn.dataset.amount) || 0;
-      console.log(`Тестовая оплата: ${product} на сумму ${amount}₽`);
-      testPaymentModal.showModal();
-    });
-  });
-
-  /* === Модалки карточек «Читать более подробно» === */
-  (function () {
-    const openButtons = document.querySelectorAll('.card__more-btn[data-modal-target]');
-    openButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-modal-target');
-        const dlg = document.getElementById(id);
-        if (dlg && typeof dlg.showModal === 'function') dlg.showModal();
-      });
-    });
-
-    document.addEventListener('click', (e) => {
-      const closeBtn = e.target.closest('[data-modal-close]');
-      if (!closeBtn) return;
-      const dlg = closeBtn.closest('dialog');
-      if (dlg) dlg.close();
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        document.querySelectorAll('dialog[open]').forEach(dlg => dlg.close());
-      }
-    });
-  })();
-
-  /* === Прелоадер === */
-  (function () {
-    const pre = document.getElementById('preloader');
-    if (!pre) return;
-
-    const fallback = setTimeout(hidePreloader, 3000);
-
-    window.addEventListener('load', () => {
-      clearTimeout(fallback);
-      requestAnimationFrame(() => requestAnimationFrame(hidePreloader));
-    });
-
-    function hidePreloader() {
-      document.documentElement.classList.remove('is-preloading');
-      pre.classList.add('preloader--hide');
-      pre.setAttribute('aria-hidden', 'true');
-
-      const remove = () => pre.remove();
-      pre.addEventListener('transitionend', remove, { once: true });
-      setTimeout(remove, 600);
-    }
-  })();
-
-  const h = document.querySelector('.header');
-  const t = () => h.classList.toggle('header--compact', scrollY > 20);
-  t(); addEventListener('scroll', t, { passive: true });
-  // 1) Глушим все href="#" (чтобы страница не улетала вверх)
-document.addEventListener('click', (e) => {
-  const a = e.target.closest('a[href="#"]');
-  if (a) e.preventDefault();
-});
-
-// 2) Блокировка скролла боди на время модалки (и восстановление позиции)
-let _scrollY = 0;
-function lockBody() {
-  _scrollY = window.scrollY || document.documentElement.scrollTop;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${_scrollY}px`;
-  document.body.style.left = '0';
-  document.body.style.right = '0';
-  document.body.style.width = '100%';
-}
-function unlockBody() {
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.left = '';
-  document.body.style.right = '';
-  document.body.style.width = '';
-  window.scrollTo(0, _scrollY);
-}
-
-// 3) Открытие/закрытие диалогов
-const dialogs = document.querySelectorAll('dialog');
-
-document.querySelectorAll('[data-open]').forEach(btn => {
-  const id = btn.dataset.open;
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    const dlg = document.getElementById(id);
-    if (dlg) {
-      lockBody();
-      dlg.showModal();
-      // клик по фону — закрыть
-      dlg.addEventListener('click', (ev) => {
-        if (ev.target === dlg) dlg.close();
-      }, { once: true });
-    }
-  });
-});
-
-document.querySelectorAll('[data-close-dialog]').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    btn.closest('dialog')?.close();
-  });
-});
-
-// при любом закрытии — возвращаем скролл
-dialogs.forEach(dlg => {
-  dlg.addEventListener('close', unlockBody);
-  dlg.addEventListener('cancel', (e) => { e.preventDefault(); dlg.close(); });
-});
-</script>
-
+<script src="assets/js/app.js" defer></script>
 </body>
 </html>

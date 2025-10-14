@@ -2186,3 +2186,25 @@ dialog.modal--video[open]{
 
 /* Иконка следует текущему цвету текста */
 .about__term-icon{ stroke: currentColor; fill: none; }
+
+
+
+/* === Section headers with icon + decorative line (about / product) === */
+.section-header { display: grid; gap: 8px; justify-items: start; }
+.section-header__title {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 800; letter-spacing: .02em;
+}
+.section-header__icon { width: 28px; height: 28px; filter: drop-shadow(0 1px 0 rgba(255,255,255,.7)); }
+.section-header__line { width: 240px; height: 12px; opacity: .8; }
+
+.section-header--about .section-header__icon { color: var(--about-icon); }
+.section-header--about .section-header__line path { stroke: url(#about-gradient); }
+
+.section-header--product .section-header__icon { color: var(--product-icon); }
+.section-header--product .section-header__line path { stroke: url(#product-gradient); }
+
+@media (max-width: 560px) {
+  .section-header__title { gap: 10px; }
+  .section-header__line { width: 200px; }
+}
