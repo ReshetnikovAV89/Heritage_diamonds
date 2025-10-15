@@ -2143,11 +2143,11 @@ dialog.modal--video[open]{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 0;
+  
   /*width: calc(50% - 8px);*/
   padding: 10px 14px;
   margin-top: 150px;
- 
+  width: 103px;
 }
 
 .card .card__more-btn {
@@ -2158,13 +2158,4 @@ dialog.modal--video[open]{
 .card .card__pay-btn {
   grid-column: 2;
   margin-left: 8px;
-}
-
-@media (max-width: 560px) {
-  .card .card__more-btn,
-  .card .card__pay-btn {
-    width: 100% !important;
-    margin: 130px 0 !important;
-    display: flex;
-  }
 }
