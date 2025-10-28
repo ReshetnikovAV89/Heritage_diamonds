@@ -1,0 +1,5 @@
+tore .
+*.xlsx
+*~
+Thumbs.db
+.DS_Store
