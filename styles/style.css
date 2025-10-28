@@ -1272,65 +1272,55 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
 html.is-preloading,
 html.is-preloading body { overflow: hidden; }
 
+/*Preloader*/
+
+/* === Простой SVG-прелоадер === */
 .preloader {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  display: grid;
-  place-items: center;
-  background: #f2f3f5;
-  color: #111;
-  transition: opacity .35s ease, visibility .35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f6fbff;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
 .preloader__inner {
-  display: grid;
-  justify-items: center;
-  gap: 18px;
-  padding: 24px 28px;
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: 0 12px 30px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
-.preloader__logo {
-  font-family: "Caveat", cursive, sans-serif;
-  font-weight: 600;
-  font-size: clamp(32px, 5vw, 46px);
-  letter-spacing: 1px;
-  text-transform: uppercase;
+.preloader__spinner {
+  width: 60px;
+  height: 60px;
+  animation: rotate 1.5s linear infinite;
 }
 
-.preloader__squares {
-  --size: 14px;
-  --gap: 10px;
-  display: grid;
-  grid-auto-flow: column;
-  gap: var(--gap);
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.preloader__spinner .path {
+  stroke: #1e90ff;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
 }
 
-.preloader__square {
-  width: var(--size);
-  height: var(--size);
-  border-radius: 3px;
-  outline: 2px solid rgba(33, 64, 178, .8);
-  background: transparent;
-  animation: sq-fill 1.2s infinite;
+.preloader__text {
+  font-family: "Raleway", sans-serif;
+  font-size: 16px;
+  color: #2441b6;
+  letter-spacing: 0.05em;
 }
 
-.preloader__square:nth-child(1) { animation-delay: 0s; }
-.preloader__square:nth-child(2) { animation-delay: .15s; }
-.preloader__square:nth-child(3) { animation-delay: .30s; }
-.preloader__square:nth-child(4) { animation-delay: .45s; }
+
 
 .preloader--hide {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
+
+
 
 @media (max-width: 480px) {
   .card__modal .card__title { padding: 16px 16px 6px; }
@@ -1619,9 +1609,8 @@ html.is-preloading body { overflow: hidden; }
   position: static !important;
   top: auto; left: auto;
   display: block;
-  padding: 16px 20px 0;
-  margin: 0;
-  max-width: none;
+   padding-right: 106px;
+  /*max-width: none;*/
   background: none;
   border: 0;
   border-radius: 0;
@@ -2106,7 +2095,7 @@ dialog.modal--video[open]{
   top: 10px;
   right: 14px;
   left: auto;
-  margin: 0;
+  margin: 0;*/
   padding: .4em .8em;
   max-width: 80%;
   text-align: right;

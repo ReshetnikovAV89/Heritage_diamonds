@@ -1,82 +1,25 @@
-// ==== Preloader (min 2.5s) + Mosaic reveal if #revealGrid exists ====
+// ==== Простой прелоадер ====
 (function () {
   const pre = document.getElementById('preloader');
   if (!pre) return;
 
-  const grid = document.getElementById('revealGrid');
-  const MIN_DISPLAY_TIME = 2500; // минимум 2.5 сек
-  const startTime = Date.now();
+  const MIN_DISPLAY_TIME = 1500; // минимум 1.5 сек
+  const start = Date.now();
 
-  function actuallyHide() {
-    if (pre.classList.contains('preloader--hide')) return;
-    // если использовался класс на <html> — снимем
-    document.documentElement.classList.remove('is-preloading');
-
-    // запускаем CSS-анимацию/переход скрытия
+  function hidePreloader() {
+    if (!pre) return;
     pre.classList.add('preloader--hide');
-    pre.setAttribute('aria-hidden', 'true');
-
-    // удаляем из DOM по завершении (и на случай, если transition не сработает)
-    const remove = () => pre.remove();
-    pre.addEventListener('animationend', remove, { once: true });
-    pre.addEventListener('transitionend', remove, { once: true });
-    setTimeout(remove, 1000); // хард-фолбэк
+    document.documentElement.classList.remove('is-preloading');
+    setTimeout(() => pre.remove(), 500);
   }
 
-  // ВЕТКА 1: есть сетка мозаики — строим и ждём завершения
-  if (grid) {
-    const rows = Number(grid.dataset.rows || 8);
-    const cols = Number(grid.dataset.cols || 12);
-    const total = rows * cols;
-    const cellW = 100 / cols;
-    const cellH = 100 / rows;
-
-    // создаём клетки со случайным порядком появления
-    const idx = Array.from({ length: total }, (_, i) => i);
-    for (let i = idx.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [idx[i], idx[j]] = [idx[j], idx[i]];
-    }
-
-    const BASE_DELAY = 30; // интервал между клетками в мс
-    idx.forEach((n, order) => {
-      const r = Math.floor(n / cols);
-      const c = n % cols;
-      const el = document.createElement('span');
-      el.className = 'reveal-grid__cell';
-      el.style.left = (c * cellW) + '%';
-      el.style.top = (r * cellH) + '%';
-      el.style.width = cellW + '%';
-      el.style.height = cellH + '%';
-      el.style.setProperty('--d', (order * BASE_DELAY) + 'ms');
-      grid.appendChild(el);
-    });
-
-    // дождёмся окончания мозаики + минимум отображения
-    const lastDelay = (total - 1) * BASE_DELAY;
-    const lastDuration = 500; // .5s как в CSS
-    const mosaicDoneAt = lastDelay + lastDuration;
-
-    window.addEventListener('load', () => {
-      const elapsed = Date.now() - startTime;
-      const waitMin = Math.max(0, MIN_DISPLAY_TIME - elapsed);
-      setTimeout(actuallyHide, Math.max(waitMin, mosaicDoneAt));
-    });
-
-    // страховка, если вдруг load не пришёл
-    setTimeout(actuallyHide, MIN_DISPLAY_TIME + mosaicDoneAt + 1500);
-  }
-  // ВЕТКА 2: сетки нет — обычный прелоадер с минимальной задержкой
-  else {
-    function hideWithMinDelay() {
-      const elapsed = Date.now() - startTime;
-      const delay = Math.max(0, MIN_DISPLAY_TIME - elapsed);
-      setTimeout(actuallyHide, delay);
-    }
-    window.addEventListener('load', hideWithMinDelay);
-    setTimeout(actuallyHide, MIN_DISPLAY_TIME + 4000); // запасной таймер
-  }
+  window.addEventListener('load', () => {
+    const elapsed = Date.now() - start;
+    const delay = Math.max(0, MIN_DISPLAY_TIME - elapsed);
+    setTimeout(hidePreloader, delay);
+  });
 })();
+
 
 /* === Модалка оплаты и видео === */
 const modal = document.getElementById("modal");

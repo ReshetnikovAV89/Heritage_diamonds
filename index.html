@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" id="top">
 <head>
-  <script>document.documentElement.classList.add('is-preloading');</script>
+  
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -35,22 +35,14 @@
 <body>
 
 <!-- Preloader -->
-<div class="preloader preloader--mosaic" id="preloader" aria-hidden="true">
-  <div class="preloader__stage">
-    <img class="reveal-image" src="/images/Preloader/Heart.png" alt="Загрузка…">
-
-    <div class="reveal-grid" id="revealGrid" data-rows="8" data-cols="12"></div>
-  </div>
-  <p class="preloader__hint">Создадим вместе...</p>
-</div>
-    
-
-    <div class="preloader__bar" aria-hidden="true">
-      <span class="preloader__bar-fill"></span>
-    </div>
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__inner">
+    <svg class="preloader__spinner" viewBox="0 0 50 50">
+      <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="4" />
+    </svg>
+    <p class="preloader__text">Загрузка...</p>
   </div>
 </div>
-
 
 </div>
   <div class="container">
@@ -456,7 +448,7 @@
 </ul>
 
 
-        <a href="#0" class="lots__look-more-link">посмотреть видео обзор (в разработке, прикреплена болванка)</a>
+        <a href="#0" class="lots__look-more-link">Посмотреть видео обзор</a>
       </section>
 
       <!-- Видео-модалка -->
