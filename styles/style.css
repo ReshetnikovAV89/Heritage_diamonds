@@ -659,20 +659,19 @@ margin-left: clamp(5rem, -7.3529rem + 47.0588vw, 35rem);
     linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.8)), 
     url(../images/cash_second.png);
   width: 400px;
-  height: 200px;
+  /* height: 200px; ← УДАЛИТЬ или закомментировать */
   background-size: cover;
   background-position: center;
   border-radius: 12px;
+  padding: 20px; /* добавляем внутренний отступ */
 }
 
 .oplata__text-end {
-  position: absolute;
-  bottom: 20px;
-  left: 50%; 
-  transform: translateX(-50%);
+  display: block;
+  margin: 20px auto 0; /* отступ сверху, центрируем */
   background-color: var(--blue-color);
-  font-size: 22px;
-  padding: 8px 16px;
+  font-size: 18px;
+  padding: 10px 20px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
